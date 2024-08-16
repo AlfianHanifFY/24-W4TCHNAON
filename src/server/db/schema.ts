@@ -4,9 +4,11 @@
 import { sql } from "drizzle-orm";
 import {
   index,
+  pgEnum,
   pgTableCreator,
   serial,
   timestamp,
+  uuid,
   varchar,
 } from "drizzle-orm/pg-core";
 
@@ -16,7 +18,10 @@ import {
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = pgTableCreator((name) => `web-24_${name}`);
+
+export const roleEnum = pgEnum("role",['user','admin','superadmin'])
+
+export const createTable = pgTableCreator((name) => `${name}`);
 
 export const posts = createTable(
   "post",
@@ -34,3 +39,20 @@ export const posts = createTable(
     nameIndex: index("name_idx").on(example.name),
   })
 );
+
+export const users = createTable("user", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  role: roleEnum("role").notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }),
+  password: varchar("password", { length: 255 }).notNull(),
+  profilePicture: varchar("profilePicture", { length: 255 }),
+  createdAt: timestamp("createdAt", {
+    mode: "date",
+    withTimezone: true,
+  }).notNull(),
+  updatedAt: timestamp("updatedAt", {
+    mode: "date",
+    withTimezone: true,
+  }).notNull(),
+});
