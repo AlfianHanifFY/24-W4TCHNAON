@@ -8,6 +8,10 @@ import { DrizzleAdapter } from '@auth/drizzle-adapter';
 import { db } from './server/db';
 import email from 'next-auth/providers/email';
 import credentials from 'next-auth/providers/credentials';
+import { hash } from 'crypto';
+import { hashSync } from 'bcryptjs';
+import { string, z } from 'zod';
+import { api } from './trpc/server';
 
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -25,12 +29,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
       authorize : async (credentials) => {
         let user = null
- 
+        
+        if (typeof credentials.email !== "string" || typeof credentials.password !== "string") {
+          throw new Error("Invalid email or password");
+        }
         // logic to salt and hash password
-        const pwHash = saltAndHashPassword(credentials.password)
- 
+        
+
         // logic to verify if the user exists
-        user = await getUserFromDb(credentials.email, pwHash)
+        user = await api.user.authenticateUser({email : credentials.email, password : credentials.password})
 
         if (!user) {
           // No user found, so this is their first attempt to login
