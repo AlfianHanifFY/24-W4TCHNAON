@@ -43,7 +43,7 @@ export default function RegisterPage() {
                         <div className="mt-5 border-b border-b-gray-600"></div>
                         {/* bottom content */}
                         <p className="py-3 text-sm font-thin text-center text-gray-400">
-                            Already have an account? <a href="/login-page" className="text-cyan-500 hover:underline">Log in</a>
+                            Already have an account? <a href="/login" className="text-cyan-500 hover:underline">Log in</a>
                             <br />
                             or
                             <br />
