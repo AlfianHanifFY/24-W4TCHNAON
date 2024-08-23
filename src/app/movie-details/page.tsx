@@ -159,6 +159,27 @@ export default function Profile() {
                     <span className="box-content w-24 h-32 shadow-xl bg-[#B3B3B3] rounded-md"></span>
                     <span className="box-content w-24 h-32 shadow-xl bg-[#B3B3B3] rounded-md"></span>
                 </div>
+                <div className="absolute left-0 z-10 right-0 h-0.5 bg-[#757575] "></div>
+                {/* Comment */}
+                <div className="py-8 antialiased">
+                <div className="max-w-full mx-auto px-4">
+                    <div className="flex justify-between items-center mb-6">
+                        <h2 className="text-lg lg:text-2xl font-bold text-gray-900">Discussion</h2>
+                    </div>
+                    <form className="mb-7">
+                        <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+                            <label htmlFor="comment" className="sr-only">Your comment</label>
+                            <textarea id="comment" rows="6"
+                                className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none  "
+                                placeholder="Write a comment..." required></textarea>
+                        </div>
+                        <button type="submit"
+                            className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center transition-shadow bg-[#F5F5F5] rounded-lg text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 justify-center ">
+                            Post comment
+                        </button>
+                    </form>
+                </div>
+            </div>
             </div>
         </div>
     );
