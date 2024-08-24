@@ -11,6 +11,7 @@ import {
   index,
 } from 'drizzle-orm/pg-core';
 import type { AdapterAccount } from 'next-auth/adapters';
+import { number } from 'zod';
 
 export const posts = pgTable(
   "post",
@@ -81,3 +82,110 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 );
+
+
+
+export const movies = pgTable(
+  'movies',
+  {
+    id : varchar('id').primaryKey().notNull(),
+    name : varchar('name').notNull(),
+    date : varchar('date'),
+    tagline : varchar('tagline'),
+    description : varchar('description'),
+    minute : varchar('minute'),
+    rating : varchar('rating')
+  }
+);
+
+export const moviePosters = pgTable(
+  'moviePosters',
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    movieId : varchar('movieId').notNull() ,
+    link : varchar('link')
+  }
+);
+
+export const movieGenres = pgTable(
+  'movieGenres',
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    movieId : varchar('movieId').notNull() ,
+    genre : varchar('genre')
+  }
+)
+
+export const movieActors = pgTable(
+  'movieActors',
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    movieId : varchar('movieId').notNull() ,
+    name : varchar('name'),
+    role : varchar('role')
+  }
+)
+
+export const movieCountries = pgTable(
+  'movieCountries',
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    movieId : varchar('movieId').notNull() ,
+    country : varchar('country'),
+
+  }
+)
+
+export const movieLanguages = pgTable(
+  'movieLanguages',
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    movieId : varchar('movieId').notNull() ,
+    type : varchar('type'),
+    role : varchar('language')
+  }
+)
+
+export const movieStudios = pgTable(
+  'movieStudios',
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    movieId : varchar('movieId').notNull() ,
+    studio : varchar('studio'),
+  }
+)
+
+export const movieReleases = pgTable(
+  'movieReleases',
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    movieId : varchar('movieId').notNull() ,
+    country : varchar('country'),
+    date : varchar('date'),
+    type : varchar('type'),
+    rating : varchar('rating')
+  }
+)
+
+export const movieThemes = pgTable(
+  'movieThemes',
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    movieId : varchar('movieId').notNull() ,
+    theme : varchar('theme')
+  }
+)
+
+export type User = typeof users.$inferSelect;
+export type Movie = typeof movies.$inferSelect;
+export type MoviePoster = typeof moviePosters.$inferSelect;
+export type MovieActor = typeof movieActors.$inferSelect;
+export type MovieCountry = typeof movieCountries.$inferSelect;
+export type MovieGenre = typeof movieGenres.$inferSelect;
+export type MovieTheme = typeof movieThemes.$inferSelect;
+export type MovieStudio = typeof movieStudios.$inferSelect;
+export type MovieRelease = typeof movieReleases.$inferSelect;
+export type MovieLanguages = typeof movieLanguages.$inferSelect;
+export type Account = typeof accounts.$inferSelect;
+export type Session = typeof sessions.$inferSelect;
+
