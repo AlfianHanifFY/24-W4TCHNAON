@@ -54,10 +54,7 @@ export default function LoginPage() {
             {/* Bottom Links */}
             <p className="py-3 text-center text-sm font-thin text-gray-400">
               Dont have an account?{" "}
-              <a
-                href="/register-page"
-                className="text-cyan-500 hover:underline"
-              >
+              <a href="/register" className="text-cyan-500 hover:underline">
                 Register
               </a>
               <br />
