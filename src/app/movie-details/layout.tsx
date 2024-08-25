@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 import { TRPCReactProvider } from "~/trpc/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { SessionProvider } from "next-auth/react";
 
 export default function RootLayout({
   children,
@@ -46,7 +47,9 @@ export default function RootLayout({
               </button>
             </nav>
           </div>
-          <div className="pt-20">{children}</div>
+          <SessionProvider>
+            <div className="pt-20">{children}</div>
+          </SessionProvider>
         </body>
       )}
     </div>
