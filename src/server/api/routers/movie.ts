@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { eq } from "drizzle-orm";
+import { comment } from "postcss";
 import { string, z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { movieActors, movieCountries, movieGenres, moviePosters, movieReleases, movies,  movieStudios,  movieThemes,  posts } from "~/server/db/schema";
+import { movieActors, movieCountries, movieGenres, moviePosters, movieReleases, movies,  movieStudios,  movieThemes,  posts, userComments, users } from "~/server/db/schema";
 
 export const movieRouter = createTRPCRouter({
 
@@ -76,5 +77,18 @@ export const movieRouter = createTRPCRouter({
       return {detail,genre,country,actor,poster,release,theme,studio}
     }),
 
+    getMovieComment: publicProcedure
+      .input(z.object({ movieId : z.string() }))
+      .query(async ({ ctx, input }) => {
+
+        const comment = await ctx.db 
+          .select()
+          .from(userComments)
+          .leftJoin(movies,eq(movies.id,userComments.movieId))
+          .leftJoin(users,eq(users.id,userComments.userid))
+          .where(eq(userComments.movieId,input.movieId))
+        
+        return comment
+      }), 
     
   });
