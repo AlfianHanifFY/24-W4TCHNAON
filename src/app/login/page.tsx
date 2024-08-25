@@ -26,8 +26,9 @@ export default function LoginPage() {
                 } catch (error) {
                   if (error instanceof AuthError) {
                     return redirect(`/login`);
+                  } else {
+                    return redirect("/");
                   }
-                  throw error;
                 }
               }}
             >
@@ -51,6 +52,7 @@ export default function LoginPage() {
               </label>
 
               {/* Button and Forgot Password */}
+
               <div className="mt-3 flex flex-col items-center justify-end space-y-3 md:flex-row md:space-y-0">
                 <button className="flex w-full items-center justify-center space-x-2 rounded-md border bg-cyan-700 p-2 px-4 font-sans font-bold text-white shadow-sm shadow-cyan-100 transition duration-150 hover:-translate-y-0.5 hover:bg-opacity-90 hover:shadow-lg md:w-auto">
                   <span>Log in</span>
@@ -73,9 +75,9 @@ export default function LoginPage() {
             </p>
             {/* Social Login Button */}
             <form
-              action={async (formData) => {
+              action={async () => {
                 "use server";
-                await signIn("github", formData);
+                await signIn("github");
               }}
             >
               <div className="flex justify-center">
