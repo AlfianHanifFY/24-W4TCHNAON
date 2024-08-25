@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
+import { float } from "drizzle-orm/mysql-core";
 import { comment } from "postcss";
 import { string, z } from "zod";
 
@@ -114,6 +115,17 @@ export const movieRouter = createTRPCRouter({
         
         return {list : mainComment}
       }),
+
+      getMovieLeaderBoard: publicProcedure
+      .query(async ({ ctx}) => {
+
+        const list = await ctx.db.execute(
+          sql`SELECT * FROM ${movies} LEFT JOIN ${moviePosters} ON ${movies.id} = ${moviePosters.movieId} ORDER BY CAST(${movies.rating} AS FLOAT) DESC LIMIT 7`
+        );
+
+        return {list : list}
+    }),
+      
 
     
   });
