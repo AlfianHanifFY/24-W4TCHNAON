@@ -82,9 +82,16 @@ export const movieRouter = createTRPCRouter({
       .query(async ({ ctx, input }) => {
 
         const comment = await ctx.db 
-          .select()
+          .select(
+            {
+              userName : users.name,
+              userAvatar : users.image,
+              comment : userComments.comment,
+              parrent : userComments.parrent
+            }
+            
+          )
           .from(userComments)
-          .leftJoin(movies,eq(movies.id,userComments.movieId))
           .leftJoin(users,eq(users.id,userComments.userid))
           .where(eq(userComments.movieId,input.movieId))
         
