@@ -181,7 +181,7 @@ export const userComments = pgTable(
   {
     id: uuid("id").primaryKey().notNull().defaultRandom(),
     movieId : varchar('movieId').notNull() ,
-    userid : varchar('userId').notNull(),
+    userid : uuid('userId').notNull(),
     comment : varchar("comment"),
     parrent : varchar("parrent")
   }
@@ -192,7 +192,7 @@ export const userFavourite = pgTable(
   {
     id: uuid("id").primaryKey().notNull().defaultRandom(),
     movieId : varchar('movieId').notNull() ,
-    userId : varchar('userId').notNull()
+    userId : uuid('userId').notNull()
   }
 )
 
@@ -201,7 +201,7 @@ export const userWatchLater = pgTable(
   {
     id: uuid("id").primaryKey().notNull().defaultRandom(),
     movieId : varchar('movieId').notNull() ,
-    userId : varchar('userId').notNull()
+    userId : uuid('userId').notNull()
   }
 )
 
