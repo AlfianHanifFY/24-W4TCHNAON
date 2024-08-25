@@ -4,7 +4,7 @@ import { createHash } from "crypto";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { users } from "~/server/db/schema";
+import { userComments, users } from "~/server/db/schema";
 
 export const userRouter = createTRPCRouter({
 
@@ -47,5 +47,28 @@ export const userRouter = createTRPCRouter({
     // Get all courses
     return await ctx.db.select().from(users);
   }),
+
+  createComment: publicProcedure
+    .input(z.object({ userId: z.string(),movieId : z.string(),comment: z.string() , parrent: z.string().optional()}))
+    .mutation(async ({ ctx, input }) => {
+
+      // ga ada parrent
+      if(input.parrent == null){
+        await ctx.db.insert(userComments).values({
+          movieId : input.movieId,
+          userid : input.userId,
+          comment : input.comment
+        });
+      }else{
+        await ctx.db.insert(userComments).values({
+          movieId : input.movieId,
+          userid : input.userId,
+          comment : input.comment,
+          parrent: input.parrent
+        });
+      }
+
+      return{ message: "new comment successfully created"}
+    }),
 
 });
