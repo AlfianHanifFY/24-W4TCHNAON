@@ -176,6 +176,36 @@ export const movieThemes = pgTable(
   }
 )
 
+export const userComments = pgTable(
+  "userComments",
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    movieId : varchar('movieId').notNull() ,
+    userid : varchar('userId').notNull(),
+    comment : varchar("comment"),
+    parrent : varchar("parrent")
+  }
+)
+
+export const userFavourite = pgTable(
+  'userFavourite',
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    movieId : varchar('movieId').notNull() ,
+    userId : varchar('userId').notNull()
+  }
+)
+
+export const userWatchLater = pgTable(
+  'userWatchLater',
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    movieId : varchar('movieId').notNull() ,
+    userId : varchar('userId').notNull()
+  }
+)
+
+
 export type User = typeof users.$inferSelect;
 export type Movie = typeof movies.$inferSelect;
 export type MoviePoster = typeof moviePosters.$inferSelect;
@@ -188,4 +218,7 @@ export type MovieRelease = typeof movieReleases.$inferSelect;
 export type MovieLanguages = typeof movieLanguages.$inferSelect;
 export type Account = typeof accounts.$inferSelect;
 export type Session = typeof sessions.$inferSelect;
+export type UserComment = typeof userComments.$inferSelect;
+export type UserFavourite = typeof userFavourite.$inferSelect;
+export type UserWatchLater = typeof userWatchLater.$inferSelect;
 
