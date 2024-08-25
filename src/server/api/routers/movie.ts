@@ -84,6 +84,7 @@ export const movieRouter = createTRPCRouter({
         const comment = await ctx.db 
           .select(
             {
+              commentId : userComments.id,
               userName : users.name,
               userAvatar : users.image,
               comment : userComments.comment,
@@ -94,8 +95,24 @@ export const movieRouter = createTRPCRouter({
           .from(userComments)
           .leftJoin(users,eq(users.id,userComments.userid))
           .where(eq(userComments.movieId,input.movieId))
+
+        const mainComment: any[] | PromiseLike<any[]>= []
+
+        comment.forEach((data)=>{
+          const reply: { commentId: string; userName: string | null; userAvatar: string | null; comment: string | null; parrent: string | null; }[] = [];
+          if (data.parrent === null){
+            comment.map((val)=>{
+              if(val.parrent === data.commentId){
+                reply.push(val);
+              }
+            })
+            const res = {main : data , reply : reply}
+            mainComment.push(res)
+          }
+        });
         
-        return comment
+        
+        return {list : mainComment}
       }), 
     
   });

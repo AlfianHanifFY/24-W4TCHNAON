@@ -187,8 +187,8 @@ export const userComments = pgTable(
   }
 )
 
-export const userFavourite = pgTable(
-  'userFavourite',
+export const userFavorite = pgTable(
+  'userFavorite',
   {
     id: uuid("id").primaryKey().notNull().defaultRandom(),
     movieId : varchar('movieId').notNull() ,
@@ -219,6 +219,6 @@ export type MovieLanguages = typeof movieLanguages.$inferSelect;
 export type Account = typeof accounts.$inferSelect;
 export type Session = typeof sessions.$inferSelect;
 export type UserComment = typeof userComments.$inferSelect;
-export type UserFavourite = typeof userFavourite.$inferSelect;
+export type UserFavourite = typeof userFavorite.$inferSelect;
 export type UserWatchLater = typeof userWatchLater.$inferSelect;
 
