@@ -1,8 +1,6 @@
 import "~/styles/globals.css";
-
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-
 import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
@@ -16,8 +14,34 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
+      <head>
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+      </head>
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        {/* Navbar */}
+        <div className="fixed top-0 left-0 right-0 z-20 bg-white bg-opacity-50 rounded-lg shadow-md">
+          <nav className="flex items-center p-5">
+            <button>
+              <a href="#">
+                <i className='bx bx-share bx-sm text-2xl transition-transform duration-300 ease-in-out hover:scale-125'></i>
+              </a>
+            </button>
+            <button className="ml-auto flex space-x-7">
+              <a href="#">
+                <i className='text-2xl transition-transform duration-300 ease-in-out hover:scale-125 bx bx-search bx-sm'></i>
+              </a>
+              <a href="#">
+                <i className='text-2xl transition-transform duration-300 ease-in-out hover:scale-125 bx bx-home bx-sm'></i>
+              </a>
+              <a href="#">
+                <i className='text-2xl transition-transform duration-300 ease-in-out hover:scale-125 bx bxs-user-circle bx-sm'></i>
+              </a>
+            </button>
+          </nav>
+        </div>
+        <div className="pt-20">
+          {children}
+        </div>
       </body>
     </html>
   );
