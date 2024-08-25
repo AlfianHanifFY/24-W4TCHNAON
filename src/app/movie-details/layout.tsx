@@ -6,6 +6,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { SessionProvider } from "next-auth/react";
+import ClientLayout from "../ClientLayout";
 
 export default function RootLayout({
   children,
@@ -47,9 +48,11 @@ export default function RootLayout({
               </button>
             </nav>
           </div>
-          <SessionProvider>
-            <div className="pt-20">{children}</div>
-          </SessionProvider>
+          <ClientLayout>
+            <SessionProvider>
+              <div className="pt-20">{children}</div>
+            </SessionProvider>
+          </ClientLayout>
         </body>
       )}
     </div>
