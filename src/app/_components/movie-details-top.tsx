@@ -2,21 +2,19 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { api } from "~/trpc/react";
-import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
-import { string } from "zod";
 
 export function MovieDetailsTop({ userId }) {
   const movie = api.movie.getMovieDetail.useQuery({ movieId: "1000001" });
   const genres = movie.data?.genre;
+  const cast = movie.data?.actor;
   const createWatchLater = api.user.createWatchLater.useMutation();
 
   return (
     <div className="p-6 font-light">
       {/* Background Image */}
       <img
-        className="absolute inset-0 z-0 h-[310px] w-full rounded-lg bg-cover bg-center object-cover"
-        src="./cover.png"
+        className="absolute inset-0 z-0 h-[310px] w-full rounded-lg bg-cover bg-center object-cover blur-lg"
+        src={movie.data?.poster[0]?.link}
         alt="image description"
       />
 
@@ -166,18 +164,16 @@ export function MovieDetailsTop({ userId }) {
               </div>
               {/* Cast */}
               <div className="space-y-3">
-                <span className="relative flex items-center">
-                  <span className="z-10 h-10 w-10 rounded-full bg-[#B3B3B3]"></span>
-                  <span className="-ml-10 h-10 w-56 rounded-full bg-[#F5F5F5]"></span>
-                </span>
-                <span className="relative flex items-center">
-                  <span className="z-10 h-10 w-10 rounded-full bg-[#B3B3B3]"></span>
-                  <span className="-ml-10 h-10 w-56 rounded-full bg-[#F5F5F5]"></span>
-                </span>
-                <span className="relative flex items-center">
-                  <span className="z-10 h-10 w-10 rounded-full bg-[#B3B3B3]"></span>
-                  <span className="-ml-10 h-10 w-56 rounded-full bg-[#F5F5F5]"></span>
-                </span>
+                {cast?.map((data) => {
+                  return (
+                    <span className="relative flex items-center">
+                      <span className="z-10 h-10 w-10 rounded-full bg-[#B3B3B3]"></span>
+                      <span className="-ml-10 h-10 w-56 rounded-full bg-[#F5F5F5] px-12 py-2">
+                        {data.name}
+                      </span>
+                    </span>
+                  );
+                })}
               </div>
             </div>
           </div>
