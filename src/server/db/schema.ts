@@ -218,4 +218,7 @@ export type MovieRelease = typeof movieReleases.$inferSelect;
 export type MovieLanguages = typeof movieLanguages.$inferSelect;
 export type Account = typeof accounts.$inferSelect;
 export type Session = typeof sessions.$inferSelect;
+export type UserComment = typeof userComments.$inferSelect;
+export type UserFavourite = typeof userFavourite.$inferSelect;
+export type UserWatchLater = typeof userWatchLater.$inferSelect;
 
