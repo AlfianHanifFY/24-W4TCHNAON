@@ -187,8 +187,8 @@ export const userComments = pgTable(
   }
 )
 
-export const userFavourite = pgTable(
-  'userFavourite',
+export const userFavorite = pgTable(
+  'userFavorite',
   {
     id: uuid("id").primaryKey().notNull().defaultRandom(),
     movieId : varchar('movieId').notNull() ,
