@@ -4,7 +4,7 @@ import { createHash } from "crypto";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { userComments, users } from "~/server/db/schema";
+import { userComments, users, userWatchLater } from "~/server/db/schema";
 
 export const userRouter = createTRPCRouter({
 
@@ -70,5 +70,15 @@ export const userRouter = createTRPCRouter({
 
       return{ message: "new comment successfully created"}
     }),
+
+  createWatchLater: publicProcedure
+    .input(z.object({userId :z.string(),movieId : z.string()}))
+    .mutation(async ({ctx,input})=>{
+      await ctx.db.insert(userWatchLater).values({
+        movieId : input.movieId,
+        userId : input.userId,
+      });
+      return {message: "new comment successfully created"}
+    })
 
 });
