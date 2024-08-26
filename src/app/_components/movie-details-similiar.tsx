@@ -2,9 +2,9 @@
 
 import { api } from "~/trpc/react";
 
-export function MovieDetailsSimiliar() {
+export function MovieDetailsSimiliar({ id }) {
   const movies = api.movie.getRecommendationByMovie.useQuery({
-    movieId: "1000001",
+    movieId: id,
   });
   const id1 = movies.data?.movieRecomendation[0].id;
   const id2 = movies.data?.movieRecomendation[1].id;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { api } from "~/trpc/react";
 
-export function MovieDetailsComment({ userId }) {
-  const comments = api.movie.getMovieComment.useQuery({ movieId: "1000001" });
+export function MovieDetailsComment({ userId, movieId }) {
+  const comments = api.movie.getMovieComment.useQuery({ movieId: movieId });
   const [comment, setComment] = useState("");
   const [parrent, setParrent] = useState("");
   const [parrentName, setParrentName] = useState("");
@@ -14,14 +14,14 @@ export function MovieDetailsComment({ userId }) {
     e.preventDefault();
     if (isReply) {
       handleComment.mutate({
-        movieId: "1000001",
+        movieId: movieId,
         userId: userId,
         comment: comment,
         parrent: parrent,
       });
     } else {
       handleComment.mutate({
-        movieId: "1000001",
+        movieId: movieId,
         userId: userId,
         comment: comment,
       });
