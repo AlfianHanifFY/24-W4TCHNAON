@@ -26,6 +26,36 @@ export const movieRouter = createTRPCRouter({
         return await fetchData()
     }),
 
+    getRecommendationByCountry: publicProcedure
+      .input(z.object({ country : z.string() }))
+        .query(async ({ ctx, input }) => {
+        
+
+        const fetchData = async () => {
+            const url = "http://localhost:8000/dataByCountry?" + "country=" + input.country;
+            console.log(url)
+            const response = await fetch(url);
+            const data = await response.json();
+            return data;
+          }
+        return await fetchData()
+    }),
+
+    getRecommendationByActorGenre: publicProcedure
+      .input(z.object({ actor : z.string(), genre : z.string() }))
+        .query(async ({ ctx, input }) => {
+        
+
+        const fetchData = async () => {
+            const url = "http://localhost:8000/dataByActorGenre?" + "actor=" + input.actor + "&genre=" + input.genre;
+            console.log(url)
+            const response = await fetch(url);
+            const data = await response.json();
+            return data;
+          }
+        return await fetchData()
+    }),
+
     getAllmovies: publicProcedure.query(async ({ ctx }) => {
       // Expected output: seluruh data course yang ada
       // Get all courses
