@@ -15,7 +15,6 @@ export default function GenrePage() {
         'Horror', 'Adventure', 'Mystery'
     ];
 
-    // Bung alfian gant
     const genremovies: { [key: string]: { title: string; poster: string; synopsis: string }[] } = {
         Romance: [
             { title: 'Romantic Movie 1', poster: 'https://via.placeholder.com/150x220?text=Romantic+Movie+1', synopsis: 'Synopsis for Romantic Movie 1' },
@@ -27,7 +26,6 @@ export default function GenrePage() {
             { title: 'Action Movie 2', poster: 'https://via.placeholder.com/150x220?text=Action+Movie+2', synopsis: 'Synopsis for Action Movie 2' },
             { title: 'Action Movie 3', poster: 'https://via.placeholder.com/150x220?text=Action+Movie+3', synopsis: 'Synopsis for Action Movie 3' },
         ],
-        // lanjutt
     };
 
     const mostPopularMovies: { title: string; poster: string; synopsis: string }[] = [
@@ -70,42 +68,9 @@ export default function GenrePage() {
     };
 
     return (
-        <div className="relative flex h-screen bg-gray-100">
-            {/* Header with Back, Home, and Profile buttons */}
-            <div className="absolute top-1 left-4 right-4 flex justify-between items-center">
-                <button
-                    className="flex items-center text-gray-600 hover:text-gray-800"
-                    onClick={() => router.back()}       
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Back
-                </button>
-                <div className="flex space-x-4">
-                    <button
-                        className="flex items-center text-gray-600 hover:text-gray-800"
-                        onClick={() => router.push('/home')}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6m0 0l2 2m-2-2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2h3" />
-                        </svg>
-                        Home
-                    </button>
-                    <button
-                        className="flex items-center text-gray-600 hover:text-gray-800"
-                        onClick={() => router.push('/profile')}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 19.121A5 5 0 0112 17a5 5 0 016.879 2.121m-13.758 0A5 5 0 0112 17a5 5 0 016.879 2.121M15 11a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                        Profile
-                    </button>
-                </div>
-            </div>
-
+        <div className="relative flex h-screen bg-gray-100 pt-16">
             {/* Sidebar */}
-            <div className="bg-white shadow-md w-1/4 p-6 rounded-lg box-border mt-16">
+            <div className="bg-white shadow-md w-1/4 p-6 rounded-lg">
                 <ul className="space-y-4">
                     <li>
                         <button 
@@ -154,7 +119,7 @@ export default function GenrePage() {
                     {selectedSection === 'Most Popular' && (
                         <>
                             <h2 className="text-3xl font-bold text-gray-800">Most Popular Movies</h2>
-                            <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                            <div className="mt-4 grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-4">
                                 {movies.map((movie) => (
                                     <div 
                                         key={movie.title} 
@@ -164,9 +129,9 @@ export default function GenrePage() {
                                         <img
                                             src={movie.poster}
                                             alt={movie.title}
-                                            className="w-full h-auto rounded-lg shadow-md"
+                                            className="w-32 h-auto rounded-lg shadow-md mx-auto"
                                         />
-                                        <h3 className="mt-2 text-lg font-semibold text-gray-800">{movie.title}</h3>
+                                        <h3 className="mt-2 text-lg font-semibold text-gray-800 w-32 mx-auto">{movie.title}</h3>
                                     </div>
                                 ))}
                             </div>
@@ -175,7 +140,7 @@ export default function GenrePage() {
                     {selectedSection === 'New Release' && (
                         <>
                             <h2 className="text-3xl font-bold text-gray-800">New Release Movies</h2>
-                            <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                            <div className="mt-4 grid grid-cols-2 gap-1  md:grid-cols-3 lg:grid-cols-4">
                                 {movies.map((movie) => (
                                     <div 
                                         key={movie.title} 
@@ -185,9 +150,9 @@ export default function GenrePage() {
                                         <img
                                             src={movie.poster}
                                             alt={movie.title}
-                                            className="w-full h-auto rounded-lg shadow-md"
+                                            className="w-32 h-auto rounded-lg shadow-md mx-auto"
                                         />
-                                        <h3 className="mt-2 text-lg font-semibold text-gray-800">{movie.title}</h3>
+                                        <h3 className="mt-2 text-lg font-semibold text-gray-800 w-32 mx-auto">{movie.title}</h3>
                                     </div>
                                 ))}
                             </div>
@@ -196,7 +161,7 @@ export default function GenrePage() {
                     {selectedSection === 'Genres' && selectedGenre && (
                         <>
                             <h2 className="text-3xl font-bold text-gray-800">{selectedGenre} Movies</h2>
-                            <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                            <div className="mt-4 grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-4">
                                 {movies.map((movie) => (
                                     <div 
                                         key={movie.title} 
@@ -206,9 +171,9 @@ export default function GenrePage() {
                                         <img
                                             src={movie.poster}
                                             alt={movie.title}
-                                            className="w-full h-auto rounded-lg shadow-md"
+                                            className="w-32 h-auto rounded-lg shadow-md mx-auto"
                                         />
-                                        <h3 className="mt-2 text-lg font-semibold text-gray-800">{movie.title}</h3>
+                                        <h3 className="mt-2 text-lg font-semibold text-gray-800 w-32 mx-auto">{movie.title}</h3>
                                     </div>
                                 ))}
                             </div>
