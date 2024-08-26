@@ -4,7 +4,7 @@ import { createHash } from "crypto";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { users } from "~/server/db/schema";
+import { userComments, users, userWatchLater } from "~/server/db/schema";
 
 export const userRouter = createTRPCRouter({
 
@@ -47,5 +47,47 @@ export const userRouter = createTRPCRouter({
     // Get all courses
     return await ctx.db.select().from(users);
   }),
+
+  createComment: publicProcedure
+    .input(z.object({ userId: z.string(),movieId : z.string(),comment: z.string() , parrent: z.string().optional()}))
+    .mutation(async ({ ctx, input }) => {
+
+      // ga ada parrent
+      if(input.parrent == null){
+        await ctx.db.insert(userComments).values({
+          movieId : input.movieId,
+          userid : input.userId,
+          comment : input.comment
+        });
+      }else{
+        await ctx.db.insert(userComments).values({
+          movieId : input.movieId,
+          userid : input.userId,
+          comment : input.comment,
+          parrent: input.parrent
+        });
+      }
+
+      return{ message: "new comment successfully created"}
+    }),
+
+  createWatchLater: publicProcedure
+    .input(z.object({userId :z.string(),movieId : z.string()}))
+    .mutation(async ({ctx,input})=>{
+
+      const movie = await ctx.db.select().from(userWatchLater).where(and(eq(userWatchLater.movieId,input.movieId),eq(userWatchLater.userId,input.userId)))
+      
+      if (movie.length == 0){
+        await ctx.db.insert(userWatchLater).values({
+          movieId : input.movieId,
+          userId : input.userId,
+        });
+        return {message: "new watchLater successfully created"}
+      }
+      return {message: "new watchLater failed created"}
+      
+    }),
+
+    
 
 });
