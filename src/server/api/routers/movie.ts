@@ -7,7 +7,7 @@ import { comment } from "postcss";
 import { string, z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { movieActors, movieCountries, movieGenres, moviePosters, movieReleases, movies,  movieStudios,  movieThemes,  posts, userComments, users } from "~/server/db/schema";
+import { movieActors, movieCountries, movieGenres, moviePosters, movieReleases, movies,  movieStudios,  movieThemes,  posts, userComments, userFavorite, users, userWatchLater } from "~/server/db/schema";
 
 export const movieRouter = createTRPCRouter({
 
@@ -160,7 +160,55 @@ export const movieRouter = createTRPCRouter({
 
         return {list : list}
     }),
-      
 
+    getRandomMovie: publicProcedure
+      .query(async ({ ctx}) => {
+
+        const movie = await ctx.db
+        .select()
+        .from(movies)
+        .leftJoin(moviePosters, eq(movies.id,moviePosters.movieId))
+        .orderBy(sql`RANDOM()`)
+        .limit(1)
+
+
+        return movie
+    }),
+
+    getFavorite: publicProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ ctx,input}) => {
+
+      const movie = await ctx.db
+      .select({
+        movieId : movies.id,
+        poster : moviePosters.link,
+        name : movies.name
+      })
+      .from(userFavorite)
+      .leftJoin(movies,eq(userFavorite.movieId,movies.id))
+      .leftJoin(moviePosters, eq(movies.id,moviePosters.movieId))
+      .where(eq(userFavorite.userId,input.userId))
+
+      return movie
+  }),
+
+  getWatchLater: publicProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ ctx,input}) => {
+
+      const movie = await ctx.db
+      .select({
+        movieId : movies.id,
+        poster : moviePosters.link,
+        name : movies.name
+      })
+      .from(userWatchLater)
+      .leftJoin(movies,eq(userWatchLater.movieId,movies.id))
+      .leftJoin(moviePosters, eq(movies.id,moviePosters.movieId))
+      .where(eq(userWatchLater.userId,input.userId))
+
+      return movie 
+    }),
     
   });
