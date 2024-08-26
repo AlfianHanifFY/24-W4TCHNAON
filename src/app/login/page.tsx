@@ -6,7 +6,7 @@ export default function LoginPage() {
                   {/* Login Form */}
                   <div className="p-4 md:p-6">
                       <h2 className="font-mono mb-3 text-xl font-bold text-left">
-                          Watchnaon (nanti pake logo)
+                          Watchnaon 
                       </h2>
                       <p className="max-w-xs mb-4 font-sans font-light text-gray-300 text-left">
                           Log in to your account
