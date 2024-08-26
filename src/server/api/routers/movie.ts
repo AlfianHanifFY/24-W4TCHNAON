@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { eq, sql } from "drizzle-orm";
@@ -119,9 +120,13 @@ export const movieRouter = createTRPCRouter({
       getMovieLeaderBoard: publicProcedure
       .query(async ({ ctx}) => {
 
-        const list = await ctx.db.execute(
-          sql`SELECT * FROM ${movies} LEFT JOIN ${moviePosters} ON ${movies.id} = ${moviePosters.movieId} ORDER BY CAST(${movies.rating} AS FLOAT) DESC LIMIT 7`
-        );
+        const list = await ctx.db
+        .select({id : movies.id,name:movies.name,link:moviePosters.link,rating:movies.rating})
+        .from(movies)
+        .leftJoin(moviePosters, sql`${movies.id} = ${moviePosters.movieId}`)
+        .orderBy(sql`CAST(${movies.rating} AS FLOAT) DESC`)
+        .limit(7)
+
 
         return {list : list}
     }),
