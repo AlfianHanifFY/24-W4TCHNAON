@@ -3,8 +3,8 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { api } from "~/trpc/react";
 
-export function MovieDetailsTop({ userId }) {
-  const movie = api.movie.getMovieDetail.useQuery({ movieId: "1000001" });
+export function MovieDetailsTop({ userId, id }) {
+  const movie = api.movie.getMovieDetail.useQuery({ movieId: id });
   const genres = movie.data?.genre;
   const cast = movie.data?.actor;
   const createWatchLater = api.user.createWatchLater.useMutation();
@@ -12,6 +12,7 @@ export function MovieDetailsTop({ userId }) {
   return (
     <div className="p-6 font-light">
       {/* Background Image */}
+
       <img
         className="absolute inset-0 z-0 h-[310px] w-full rounded-lg bg-cover bg-center object-cover blur-lg"
         src={movie.data?.poster[0]?.link}
