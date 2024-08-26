@@ -31,7 +31,7 @@ export default function Random() {
                             </div>
 
                             {/* Watch Later */}
-                            <div className="relative left-52 delay-300 cursor-pointer transition-shadow font-normal px-11 py-2 bg-gradient-to-r from-[#BA0000] to-[#FF0000] rounded-full flex items-center text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:from-[#a30303] hover:to-[#d40000] space-x-2">
+                            <div className="relative left-52 delay-300 cursor-pointer transition-shadow font-normal px-11 py-2 bg-gradient-to-r from-[#BA0000] to-[#FF0000] rounded-full flex items-center text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:from-[#a30303] hover:to-[#d40000] space-x-2">
                                 <i className="bx bx-time-five"></i> {/* Icon */}
                                 <a href="#">Watch Later</a>
                             </div>
@@ -55,10 +55,10 @@ export default function Random() {
                             {/* Add to List */}
                             <Menu as="div" className="relative inline-block text-left left-32 ">
                                 <div>
-                                    <MenuButton className="inline-flex delay-300 cursor-pointer transition-shadow font-normal px-9 py-2 bg-gradient-to-r from-[#BA0000] to-[#FF0000] rounded-full items-center text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:from-[#a30303] hover:to-[#d40000] space-x-1">
+                                    <MenuButton className="inline-flex delay-300 cursor-pointer transition-shadow font-normal px-9 py-2 bg-gradient-to-r from-[#BA0000] to-[#FF0000] rounded-full items-center text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:from-[#a30303] hover:to-[#d40000] space-x-1">
                                         <i className='bx bx-plus'></i>
                                         <span>Add to List</span>
-                                    <ChevronDownIcon aria-hidden="true" className="h-5 w-5 text-gray-400" />
+                                    <ChevronDownIcon aria-hidden="true" className="h-5 w-5 text-white" />
                                     </MenuButton>
                                 </div>
                                 <MenuItems
