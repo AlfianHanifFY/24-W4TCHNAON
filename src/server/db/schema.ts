@@ -205,6 +205,16 @@ export const userWatchLater = pgTable(
   }
 )
 
+export const userPreference = pgTable(
+  "userPreference",
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    genre : varchar('genre').notNull() ,
+    country : varchar('country').notNull() ,
+    userId : uuid('userId').notNull()
+  }
+)
+
 
 export type User = typeof users.$inferSelect;
 export type Movie = typeof movies.$inferSelect;
