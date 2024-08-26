@@ -8,7 +8,7 @@ export function MovieDetailsTop({ userId, id }) {
   const genres = movie.data?.genre;
   const cast = movie.data?.actor;
   const createWatchLater = api.user.createWatchLater.useMutation();
-
+  const createFavorite = api.user.createFavorite.useMutation();
   return (
     <div className="p-6 font-light">
       {/* Background Image */}
@@ -49,51 +49,21 @@ export function MovieDetailsTop({ userId, id }) {
               </form>
             </div>
             {/* Add to List */}
-            <Menu as="div" className="relative inline-block text-left">
-              <div>
-                <MenuButton className="gap-x-1.0 inline-flex w-52 items-center justify-center rounded-full bg-[#F5F5F5] px-5 py-2 font-normal text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                  <i className="bx bx-plus"></i>
-                  Add to List
-                  <ChevronDownIcon
-                    aria-hidden="true"
-                    className="-mr-1 h-5 w-5 text-gray-400"
-                  />
-                </MenuButton>
-              </div>
-
-              <MenuItems
-                transition
-                className="absolute left-1/2 z-10 mt-2 w-40 origin-top-right -translate-x-1/2 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+            <div className="flex cursor-pointer items-center justify-center space-x-2 rounded-full bg-[#F5F5F5] px-5 py-2 font-normal text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-shadow delay-300 hover:bg-gray-50">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  createFavorite.mutate({
+                    userId: userId,
+                    movieId: id,
+                  });
+                }}
               >
-                <div className="py-1">
-                  <MenuItem>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-center text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-                    >
-                      My List 1
-                    </a>
-                  </MenuItem>
-                  <MenuItem>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-center text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-                    >
-                      My List 2
-                    </a>
-                  </MenuItem>
-                  <MenuItem>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-center text-sm text-gray-500 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-                    >
-                      <i className="bx bx-plus pr-2"></i>
-                      Create List
-                    </a>
-                  </MenuItem>
-                </div>
-              </MenuItems>
-            </Menu>
+                <button>
+                  <span>Add Favorite </span>
+                </button>
+              </form>
+            </div>
             {/* Comments */}
           </div>
           <div className="mt-16 flex flex-col text-center">
