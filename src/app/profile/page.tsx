@@ -12,7 +12,7 @@ export default function ProfilePage() {
     required: true,
     onUnauthenticated() {
       router.push("/api/auth/signin");
-      router.refresh();
+      window.location.reload();
     },
   });
   const user = data?.user;
