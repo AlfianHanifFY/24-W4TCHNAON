@@ -4,7 +4,8 @@ import { createHash } from "crypto";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { userComments, userFavorite, users, userWatchLater } from "~/server/db/schema";
+import { userActor, userComments, userCountry, userFavorite, userGenre, users, userWatchLater } from "~/server/db/schema";
+import { Actor } from "next/font/google";
 
 export const userRouter = createTRPCRouter({
 
@@ -102,6 +103,57 @@ export const userRouter = createTRPCRouter({
         return {message: "new Favorite successfully created"}
       }
       return {message: "new Favorite failed created"}
+      
+    }),
+
+    createUserActor: publicProcedure
+    .input(z.object({userId :z.string(),actor : z.string()}))
+    .mutation(async ({ctx,input})=>{
+
+      const movie = await ctx.db.select().from(userActor).where(and(eq(userActor.actor,input.actor),eq(userActor.userId,input.userId)))
+      
+      if (movie.length == 0){
+        await ctx.db.insert(userActor).values({
+          actor : input.actor,
+          userId : input.userId,
+        });
+        return {message: "new actor successfully created"}
+      }
+      return {message: "new actor failed created"}
+      
+    }),
+
+    createUserGenre: publicProcedure
+    .input(z.object({userId :z.string(),genre : z.string()}))
+    .mutation(async ({ctx,input})=>{
+
+      const movie = await ctx.db.select().from(userGenre).where(and(eq(userGenre.genre,input.genre),eq(userGenre.userId,input.userId)))
+      
+      if (movie.length == 0){
+        await ctx.db.insert(userGenre).values({
+          genre: input.genre,
+          userId : input.userId,
+        });
+        return {message: "new genre successfully created"}
+      }
+      return {message: "new genre failed created"}
+      
+    }),
+
+    createUserCountry: publicProcedure
+    .input(z.object({userId :z.string(),country : z.string()}))
+    .mutation(async ({ctx,input})=>{
+
+      const movie = await ctx.db.select().from(userCountry).where(and(eq(userCountry.country,input.country),eq(userCountry.userId,input.userId)))
+      
+      if (movie.length == 0){
+        await ctx.db.insert(userCountry).values({
+          country : input.country,
+          userId : input.userId,
+        });
+        return {message: "new country successfully created"}
+      }
+      return {message: "new country failed created"}
       
     }),
 
