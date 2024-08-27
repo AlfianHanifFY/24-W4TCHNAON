@@ -3,6 +3,8 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { FavoriteMovies } from "~/app/_components/favorite-movie";
+import { api } from "~/trpc/react";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -49,14 +51,8 @@ export default function ProfilePage() {
       </div>
 
       {/* Box */}
-      <div className="h-auto w-full">
-        <div className="relative z-10 ml-20 mt-16 flex space-x-4">
-          <div className="flex flex-col">
-            <div className="group relative box-content h-48 w-40 rounded-md bg-[#B3B3B3] shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 sm:h-52 sm:w-48 md:h-64 md:w-52">
-              <i className="bx bxs-heart absolute bottom-2 right-2 text-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></i>
-            </div>
-          </div>
-        </div>
+      <div className="w-full">
+        <FavoriteMovies id={user?.id} />
       </div>
     </div>
   );

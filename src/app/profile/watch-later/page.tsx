@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { WatchLaterMovies } from "~/app/_components/watch-later-movie";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -49,11 +50,7 @@ export default function ProfilePage() {
       </div>
 
       <div className="h-auto w-full">
-        <div className="relative z-10 ml-20 mt-16 flex space-x-4">
-          <div className="flex flex-col">
-            <div className="box-content h-48 w-40 rounded-md bg-[#B3B3B3] shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 sm:h-52 sm:w-48 md:h-64 md:w-52"></div>
-          </div>
-        </div>
+        <WatchLaterMovies id={user?.id} />
       </div>
     </div>
   );
