@@ -11,12 +11,10 @@ export default function Random() {
     required: true,
     onUnauthenticated() {
       router.push("/api/auth/signin");
+      window.location.reload();
     },
   });
   const user = sessionData?.user;
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
 
   const [name, setName] = useState("");
   const [poster, setPoster] = useState("");
@@ -37,6 +35,9 @@ export default function Random() {
       setId(data[0]?.movies.id);
     }
   };
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="mt-16 p-12">
       <link rel="preconnect" href="https://fonts.googleapis.com" />
