@@ -1,9 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Navbar from "./navbar/page";
+import Navbar from "./_components/navbar";
 
-export default function ClientLayout({ children }: { children: React.ReactNode }) {
+export default function ClientLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   const noNavbarRoutes = ["/login", "/register-page"];
 
