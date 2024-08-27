@@ -5,7 +5,7 @@ export default function Recommendation() {
     <>
       <div className="mb-20">navbar</div>
       <div className="mb-3 ml-4">
-        <a>
+        <a href="http://localhost:3000/choose-genre-actor">
           <button>
             <div className="flex items-center justify-center rounded-full border-2 border-[#BA0000] bg-[#F5F5F5] px-7 py-1 text-[#BA0000] hover:bg-[#BA0000] hover:text-white">
               <i className="bx bx-refresh"></i> {/* Icon */}
