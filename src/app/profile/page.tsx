@@ -12,12 +12,14 @@ export default function ProfilePage() {
     required: true,
     onUnauthenticated() {
       router.push("/api/auth/signin");
+      router.refresh();
     },
   });
   const user = data?.user;
   if (status === "loading") {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="mt-16 flex">
       {/* left navbar */}

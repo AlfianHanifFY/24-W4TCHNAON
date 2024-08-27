@@ -24,9 +24,10 @@ const Navbar: React.FC = () => {
 
   const handleReload = (href: string) => {
     if (pathname === href) {
-      router.reload();
+      router.refresh();
     } else {
       router.push(href);
+      router.refresh();
     }
   };
 
@@ -35,7 +36,7 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto flex items-center justify-between">
         <div className="text-2xl font-bold text-white">
           <Link href="/" aria-label="Home" onClick={() => handleReload("/")}>
-            Watchnaon
+            W4TCHNAON
           </Link>
         </div>
         <div className="hidden flex-grow justify-center space-x-6 md:flex">
@@ -50,7 +51,7 @@ const Navbar: React.FC = () => {
               }`}
               aria-label={link.label}
             >
-              {link.label}
+              <button> {link.label}</button>
             </a>
           ))}
         </div>
