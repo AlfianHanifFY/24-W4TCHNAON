@@ -4,7 +4,7 @@ import { createHash } from "crypto";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { userComments, users, userWatchLater } from "~/server/db/schema";
+import { userComments, userFavorite, users, userWatchLater } from "~/server/db/schema";
 
 export const userRouter = createTRPCRouter({
 
@@ -42,10 +42,10 @@ export const userRouter = createTRPCRouter({
         ))
     return user[0]
   }),
-  getAllUsers: publicProcedure.query(async ({ ctx }) => {
+  getUser: publicProcedure.input(z.object({userId :z.string()})).query(async ({ ctx,input }) => {
     // Expected output: seluruh data course yang ada
     // Get all courses
-    return await ctx.db.select().from(users);
+    return await ctx.db.select().from(users).where(eq(users.id,input.userId));
   }),
 
   createComment: publicProcedure
@@ -85,6 +85,23 @@ export const userRouter = createTRPCRouter({
         return {message: "new watchLater successfully created"}
       }
       return {message: "new watchLater failed created"}
+      
+    }),
+
+    createFavorite: publicProcedure
+    .input(z.object({userId :z.string(),movieId : z.string()}))
+    .mutation(async ({ctx,input})=>{
+
+      const movie = await ctx.db.select().from(userFavorite).where(and(eq(userFavorite.movieId,input.movieId),eq(userFavorite.userId,input.userId)))
+      
+      if (movie.length == 0){
+        await ctx.db.insert(userFavorite).values({
+          movieId : input.movieId,
+          userId : input.userId,
+        });
+        return {message: "new Favorite successfully created"}
+      }
+      return {message: "new Favorite failed created"}
       
     }),
 
