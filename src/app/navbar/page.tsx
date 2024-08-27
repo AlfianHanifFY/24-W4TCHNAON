@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { Label } from "@headlessui/react";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +21,7 @@ const Navbar: React.FC = () => {
     { href: "/recommendation", label: "Recommendation" },
     { href: "/leaderboard", label: "Leaderboard" },
     { href: "/my-list", label: "My List" },
+    { href: "/random", label: "Random" },
   ];
 
   const handleReload = (href: string) => {
