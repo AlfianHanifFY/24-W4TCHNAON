@@ -1,10 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -13,36 +16,73 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => pathname === path;
 
   const navLinks = [
-    { href: "http://localhost:3000/", label: "Home" },
-    { href: "http://localhost:3000/recommendation", label: "Recommendation" },
-    { href: "http://localhost:3000/leaderboard", label: "Leaderboard" },
-    { href: "http://localhost:3000/my-list", label: "My List" },
+    { href: "/", label: "Home" },
+    { href: "/recommendation", label: "Recommendation" },
+    { href: "/leaderboard", label: "Leaderboard" },
+    { href: "/my-list", label: "My List" },
   ];
+
+  const handleReload = (href: string) => {
+    if (pathname === href) {
+      router.reload();
+    } else {
+      router.push(href);
+    }
+  };
 
   return (
     <nav className="fixed top-0 z-50 w-full bg-black p-4 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
         <div className="text-2xl font-bold text-white">
-          <Link href="/">Watchnaon</Link>
+          <Link href="/" aria-label="Home" onClick={() => handleReload("/")}>
+            Watchnaon
+          </Link>
         </div>
         <div className="hidden flex-grow justify-center space-x-6 md:flex">
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.href}
-              href={link.href}
+              onClick={() => handleReload(link.href)}
               className={`text-gray-300 transition duration-500 ease-in-out hover:text-white ${
                 isActive(link.href)
                   ? "rounded-lg bg-red-600 px-4 py-2 text-white shadow-lg"
                   : "px-4 py-2"
               }`}
+              aria-label={link.label}
             >
               {link.label}
-            </Link>
+            </a>
           ))}
         </div>
         <div className="flex items-center space-x-4">
           <div className="hidden text-2xl font-bold text-white md:block">
-            <Link href="http://localhost:3000/profile">
+            <Link
+              href="/search-movie"
+              aria-label="Search Movies"
+              onClick={() => handleReload("/search-movie")}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="h-8 w-8 transition-all duration-500 ease-in-out hover:text-gray-300"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0zM17.293 17.293l4.294 4.293"
+                />
+              </svg>
+            </Link>
+          </div>
+          <div className="hidden text-2xl font-bold text-white md:block">
+            <Link
+              href="/profile"
+              aria-label="Profile"
+              onClick={() => handleReload("/profile")}
+            >
               <div
                 className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-500 ease-in-out ${
                   isActive("/profile") ? "bg-red-600 shadow-lg" : "bg-gray-700"
@@ -65,6 +105,7 @@ const Navbar: React.FC = () => {
             <button
               onClick={toggleMenu}
               className="text-gray-300 transition duration-500 ease-in-out hover:text-white focus:outline-none"
+              aria-label="Toggle Menu"
             >
               <svg
                 className="h-8 w-8"
@@ -93,25 +134,27 @@ const Navbar: React.FC = () => {
       >
         <div className="flex flex-col space-y-2 p-4">
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.href}
-              href={link.href}
+              onClick={() => handleReload(link.href)}
               className={`text-gray-300 transition duration-500 ease-in-out hover:text-white ${
                 isActive(link.href)
                   ? "rounded-md bg-red-600 py-2 text-white shadow-lg"
                   : "rounded-md bg-slate-600 py-2"
               }`}
+              aria-label={link.label}
             >
               {link.label}
-            </Link>
+            </a>
           ))}
-          <Link
-            href="/profile"
+          <a
+            onClick={() => handleReload("/profile")}
             className={`flex items-center justify-center text-gray-300 transition duration-500 ease-in-out hover:text-white ${
               isActive("/profile")
                 ? "rounded-md bg-red-600 py-2 text-white shadow-lg"
                 : "rounded-md bg-slate-600 py-2"
             }`}
+            aria-label="Profile"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +166,7 @@ const Navbar: React.FC = () => {
               <circle cx="12" cy="7" r="4"></circle>
               <path d="M5.5 21a7.5 11.5 0 0 1 13 0"></path>
             </svg>
-          </Link>
+          </a>
         </div>
       </div>
     </nav>
