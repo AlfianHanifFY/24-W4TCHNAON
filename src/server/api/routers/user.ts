@@ -42,10 +42,10 @@ export const userRouter = createTRPCRouter({
         ))
     return user[0]
   }),
-  getAllUsers: publicProcedure.query(async ({ ctx }) => {
+  getUser: publicProcedure.input(z.object({userId :z.string()})).query(async ({ ctx,input }) => {
     // Expected output: seluruh data course yang ada
     // Get all courses
-    return await ctx.db.select().from(users);
+    return await ctx.db.select().from(users).where(eq(users.id,input.userId));
   }),
 
   createComment: publicProcedure
