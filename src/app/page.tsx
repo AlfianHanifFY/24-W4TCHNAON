@@ -34,7 +34,7 @@ export default async function HomePage() {
             <p>
               Immerse yourself in the world of cinema with our comprehensive
               platform designed for movie enthusiasts of all kinds. Whether
-              you’re a casual viewer or a dedicated film critic, our website
+              youre a casual viewer or a dedicated film critic, our website
               offers everything you need to make informed decisions about what
               to watch next. Dive into our extensive library of film reviews,
               explore movies through tailored search filters, and create custom
@@ -46,7 +46,6 @@ export default async function HomePage() {
               Start Review
             </button>
           </div>
-        </div>
 
         {/* Main */}
         <div className="relative flex w-full">
@@ -513,6 +512,7 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </main>
   );
