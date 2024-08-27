@@ -39,7 +39,7 @@ export function MovieDetailsTop({ userId, id }) {
                   e.preventDefault();
                   createWatchLater.mutate({
                     userId: userId,
-                    movieId: "1000001",
+                    movieId: id,
                   });
                 }}
               >
