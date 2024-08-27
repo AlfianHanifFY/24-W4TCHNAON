@@ -219,7 +219,6 @@ export const userCountry = pgTable(
   "userCountry",
   {
     id: uuid("id").primaryKey().notNull().defaultRandom(),
-    genre : varchar('genre').notNull() ,
     country : varchar('country').notNull() ,
     userId : uuid('userId').notNull()
   }
@@ -230,7 +229,6 @@ export const userGenre = pgTable(
   {
     id: uuid("id").primaryKey().notNull().defaultRandom(),
     genre : varchar('genre').notNull() ,
-    country : varchar('country').notNull() ,
     userId : uuid('userId').notNull()
   }
 )
@@ -239,8 +237,7 @@ export const userActor = pgTable(
   "userActor",
   {
     id: uuid("id").primaryKey().notNull().defaultRandom(),
-    genre : varchar('genre').notNull() ,
-    country : varchar('country').notNull() ,
+    actor : varchar('actor').notNull() ,
     userId : uuid('userId').notNull()
   }
 )
