@@ -44,14 +44,6 @@ export default function Recommendation() {
         Movie from your neighbor
       </div>
       <MovieRecomendationByLocation params={country} />
-
-      {userMovie.data?.map((val) => {
-        return (
-          <>
-            <MovieRecomendation movieId={val.movieId} refName={val.name} />{" "}
-          </>
-        );
-      })}
     </>
   );
 }

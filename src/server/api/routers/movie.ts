@@ -17,13 +17,13 @@ export const movieRouter = createTRPCRouter({
         
 
         const fetchData = async () => {
-            const url = "http://103.157.97.145:8001/data?" + "movieId=" + input.movieId;
+            const url = "http://127.0.0.1:8000/data?" + "movieId=" + input.movieId;
             console.log(url)
             const response = await fetch(url);
             const data = await response.json();
             return data;
           }
-        return await fetchData()
+        return fetchData()
     }),
 
     getRecommendationByCountry: publicProcedure
@@ -32,13 +32,13 @@ export const movieRouter = createTRPCRouter({
         
 
         const fetchData = async () => {
-            const url = "http://103.157.97.145:8001/dataByCountry?" + "country=" + input.country;
+            const url = "http://127.0.0.1:8000/dataByCountry?" + "country=" + input.country;
             console.log(url)
             const response = await fetch(url);
             const data = await response.json();
             return data;
           }
-        return await fetchData()
+        return fetchData()
     }),
 
     getRecommendationByActorGenre: publicProcedure
@@ -52,7 +52,7 @@ export const movieRouter = createTRPCRouter({
           input.actor.forEach(a => params.append('actor', a));
           input.genre.forEach(g => params.append('genre', g));
           
-          const url = `http://103.157.97.145:8001/dataByActorGenre?${params.toString()}`;
+          const url = `http://127.0.0.1:8000/dataByActorGenre?${params.toString()}`;
         
           console.log(url);
         
@@ -61,7 +61,7 @@ export const movieRouter = createTRPCRouter({
           return data;
         };
 
-        return await fetchData();
+        return fetchData();
   }),
 
 
