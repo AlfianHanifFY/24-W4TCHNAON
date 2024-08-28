@@ -53,7 +53,7 @@ export function MovieRecomendationByActorGenre({ actor, genre }) {
         {arr.map((id) => {
           const movie = api.movie.getMoviePoster.useQuery({ movieId: id });
           const url = movie.data?.list[0]?.link;
-          const url_route = "http://localhost:3000/movie-details/" + id;
+          const url_route = "movie-details/" + id;
           return (
             <div className="rounded-lg bg-white shadow-md hover:scale-105">
               <a href={url_route}>
