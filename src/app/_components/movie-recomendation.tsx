@@ -2,7 +2,7 @@
 
 import { api } from "~/trpc/react";
 
-export function MovieRecomendation({ movieId }) {
+export function MovieRecomendation({ movieId, refName }) {
   const movies = api.movie.getRecommendationByMovie.useQuery({
     movieId: movieId,
   });
@@ -13,20 +13,17 @@ export function MovieRecomendation({ movieId }) {
   const id4 = movies.data?.movieRecomendation[3].id;
   const id5 = movies.data?.movieRecomendation[4].id;
   const id6 = movies.data?.movieRecomendation[5].id;
-  const id7 = movies.data?.movieRecomendation[6].id;
-  const id8 = movies.data?.movieRecomendation[7].id;
-  const id9 = movies.data?.movieRecomendation[8].id;
-  const id10 = movies.data?.movieRecomendation[9].id;
-  const id11 = movies.data?.movieRecomendation[10].id;
-  const id12 = movies.data?.movieRecomendation[11].id;
 
-  const arr = [id1, id2, id3, id4, id5, id6, id7, id8, id9, id10, id11, id12];
+  const arr = [id1, id2, id3, id4, id5, id6];
   return (
     <>
+      <div className="my-4 ml-4 text-2xl font-bold text-black">
+        <p>Because You Likes "{refName}"</p>
+      </div>
       <div className="mt-4 grid grid-cols-6 gap-4 bg-white p-4">
         {arr.map((id) => {
-          const movie = api.movie.getMovieDetail.useQuery({ movieId: id });
-          const url = movie.data?.poster[0]?.link;
+          const movie = api.movie.getMoviePoster.useQuery({ movieId: id });
+          const url = movie.data?.list[0]?.link;
           const url_route = "http://localhost:3000/movie-details/" + id;
           return (
             <div className="rounded-lg bg-white shadow-md hover:scale-105">
@@ -37,14 +34,14 @@ export function MovieRecomendation({ movieId }) {
                 ></div>
                 <div className="p-4">
                   <div className="text-center font-semibold">
-                    {movie.data?.detail[0]?.name}
+                    {movie.data?.list[0]?.name}
                   </div>
                   <div className="mt-2 flex items-center justify-center">
                     {Array.from({ length: 5 }, (_, i) => (
                       <svg
                         key={i}
                         className={`h-4 w-4 ${
-                          i < Number(movie.data?.detail[0]?.rating)
+                          i < Number(movie.data?.list[0]?.rating)
                             ? "text-yellow-400"
                             : "text-gray-300"
                         }`}
