@@ -22,9 +22,7 @@ export function MovieDetailsSimiliar({ id }) {
         const movie = api.movie.getMovieDetail.useQuery({ movieId: id });
         const url = movie.data?.poster[0]?.link;
         return (
-          <a
-            href={`https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${id}`}
-          >
+          <a href={`movie-details/${id}`}>
             <div className="hover:scale-105">
               <span className="box-content h-auto w-auto overflow-hidden rounded-md bg-[#B3B3B3] shadow-xl">
                 <img src={url} alt="Movie Poster" width={500} height={300} />

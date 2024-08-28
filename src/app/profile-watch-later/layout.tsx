@@ -15,6 +15,11 @@ export default function RootLayout({
 }>) {
   const [isClient, setIsClient] = useState(false); // Initializing useState
   const [domLoaded, setDomLoaded] = useState(false);
+
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
+
   useEffect(() => {
     setIsClient(true);
     setDomLoaded(true); // Setting the state to true after the component mounts

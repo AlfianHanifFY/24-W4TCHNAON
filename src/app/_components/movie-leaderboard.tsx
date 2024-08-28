@@ -31,9 +31,7 @@ export default function MovieLeaderboard() {
           <div className="absolute -right-5 -top-5 rounded-full bg-gray-400 px-3 py-1 text-white shadow-lg">
             2
           </div>
-          <a
-            href={`https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${data.data?.list[1].id}`}
-          >
+          <a href={`movie-details/${data.data?.list[1].id}`}>
             <img
               src={data.data?.list[1].link}
               alt="Cover"
@@ -49,9 +47,7 @@ export default function MovieLeaderboard() {
           <div className="absolute -right-6 -top-6 rounded-full bg-yellow-400 px-3 py-1 text-white shadow-lg">
             1
           </div>
-          <a
-            href={`https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${data.data?.list[0].id}`}
-          >
+          <a href={`movie-details/${data.data?.list[0].id}`}>
             <img
               src={data.data?.list[0].link}
               alt="Cover"
@@ -68,9 +64,7 @@ export default function MovieLeaderboard() {
           <div className="absolute -right-5 -top-5 rounded-full bg-orange-400 px-3 py-1 text-white shadow-lg">
             3
           </div>
-          <a
-            href={`https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${data.data?.list[2].id}`}
-          >
+          <a href={`movie-details/${data.data?.list[2].id}`}>
             <img
               src={data.data?.list[2].link}
               alt="Cover"
@@ -94,9 +88,7 @@ export default function MovieLeaderboard() {
             <span className="w-12 text-3xl font-bold text-gray-700">
               {rank + 4}
             </span>
-            <a
-              href={`https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${val.id}`}
-            >
+            <a href={`movie-details/${val.id}`}>
               <img
                 src={val.link}
                 alt="Cover"

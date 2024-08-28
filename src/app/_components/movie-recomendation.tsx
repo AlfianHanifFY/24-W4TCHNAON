@@ -24,9 +24,7 @@ export function MovieRecomendation({ movieId, refName }) {
         {arr.map((id) => {
           const movie = api.movie.getMoviePoster.useQuery({ movieId: id });
           const url = movie.data?.list[0]?.link;
-          const url_route =
-            "https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/" +
-            id;
+          const url_route = "movie-details/" + id;
           return (
             <div className="rounded-lg bg-white shadow-md hover:scale-105">
               <a href={url_route}>
