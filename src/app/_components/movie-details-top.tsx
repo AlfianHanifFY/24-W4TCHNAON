@@ -22,7 +22,7 @@ export function MovieDetailsTop({ userId, id }) {
       {/* Box, Title, and Genres */}
       <div className="relative z-10 ml-20 mt-16 flex items-start space-x-4">
         <div className="flex flex-col">
-          <div className="box-content h-48 w-40 overflow-hidden rounded-md bg-[#a39494] shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 sm:h-52 sm:w-48 md:h-64 md:w-52">
+          <div className="box-content h-52 w-40 overflow-hidden rounded-md bg-[#a39494] shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 sm:h-52 sm:w-48 md:h-64 md:w-52">
             <img
               src={movie.data?.poster[0]?.link}
               alt="Movie Poster"
