@@ -52,7 +52,9 @@ export const userRouter = createTRPCRouter({
   createComment: publicProcedure
     .input(z.object({ userId: z.string(),movieId : z.string(),comment: z.string() , parrent: z.string().optional()}))
     .mutation(async ({ ctx, input }) => {
-
+      if(input.comment == null || input.comment == ''){
+        return {'message' : 'comment null'}
+      }
       // ga ada parrent
       if(input.parrent == null){
         await ctx.db.insert(userComments).values({
@@ -76,6 +78,9 @@ export const userRouter = createTRPCRouter({
     .input(z.object({userId :z.string(),movieId : z.string()}))
     .mutation(async ({ctx,input})=>{
 
+      if(input.movieId == null || input.movieId == ''){
+        return {'message' : 'movieId null'}
+      }
       const movie = await ctx.db.select().from(userWatchLater).where(and(eq(userWatchLater.movieId,input.movieId),eq(userWatchLater.userId,input.userId)))
       
       if (movie.length == 0){
@@ -92,6 +97,9 @@ export const userRouter = createTRPCRouter({
     createFavorite: publicProcedure
     .input(z.object({userId :z.string(),movieId : z.string()}))
     .mutation(async ({ctx,input})=>{
+      if(input.movieId == null || input.movieId == ''){
+        return {'message' : 'movieId null'}
+      }
 
       const movie = await ctx.db.select().from(userFavorite).where(and(eq(userFavorite.movieId,input.movieId),eq(userFavorite.userId,input.userId)))
       
@@ -144,7 +152,7 @@ export const userRouter = createTRPCRouter({
     .input(z.object({userId :z.string(),country : z.string()}))
     .mutation(async ({ctx,input})=>{
 
-      const movie = await ctx.db.select().from(userCountry).where(and(eq(userCountry.country,input.country),eq(userCountry.userId,input.userId)))
+      const movie = await ctx.db.select().from(userCountry).where(eq(userCountry.userId,input.userId))
       
       if (movie.length == 0){
         await ctx.db.insert(userCountry).values({
@@ -153,9 +161,19 @@ export const userRouter = createTRPCRouter({
         });
         return {message: "new country successfully created"}
       }
-      return {message: "new country failed created"}
+      await ctx.db.update(userCountry).set({
+        country : input.country,
+        userId : input.userId,
+      }).where(eq(userCountry.userId,input.userId));
+      return {message: "new country updated"}
       
     }),
+
+    getUserCountry : publicProcedure
+    .input(z.object({userId : z.string()}))
+    .query(async ({ctx,input}) => {
+      return await ctx.db.select({country : userCountry.country}).from(userCountry).where(eq(userCountry.userId,input.userId))
+    })
 
     
 
