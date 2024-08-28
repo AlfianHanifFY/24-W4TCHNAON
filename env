@@ -1,0 +1,14 @@
+# When adding additional environment variables, the schema in "/src/env.js"
+# should be updated accordingly.
+
+# Drizzle
+DATABASE_URL="postgresql://postgres.dedshwgzbuxwrdjkcygx:qatpuj-1vifcy-fubzUn@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres"
+AUTH_DRIZZLE_URL="postgresql://postgres.dedshwgzbuxwrdjkcygx:qatpuj-1vifcy-fubzUn@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres"
+
+# Example:
+# SERVERVAR="foo"
+# NEXT_PUBLIC_CLIENTVAR="bar"
+AUTH_SECRET= 29d3e940faf0a1617cedb9b88772a04ad20d45adce7b8c11fe2797921fe351ad
+AUTH_GITHUB_ID=Ov23li9RHOELbbWL4aPo
+AUTH_GITHUB_SECRET=a3ceafb271c49d7d1291b299077d676c5598d1f7
+
