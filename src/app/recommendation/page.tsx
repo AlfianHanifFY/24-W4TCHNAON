@@ -1,6 +1,25 @@
+"use client";
+import { api } from "~/trpc/react";
 import { MovieRecomendation } from "../_components/movie-recomendation";
+import { MovieRecomendationByActorGenre } from "../_components/movie-recomendation-by-actor-genre";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { MovieRecomendationByLocation } from "../_components/movie-recomendation-by-location";
 
 export default function Recommendation() {
+  const router = useRouter();
+  const { data, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/api/auth/signin");
+      window.location.reload();
+    },
+  });
+  const user = data?.user;
+  const country = api.user.getUserCountry.useQuery({ userId: user?.id });
+
+  const userMovie = api.movie.getFavorite.useQuery({ userId: user?.id });
+
   return (
     <>
       <div className="mb-20">navbar</div>
@@ -14,13 +33,25 @@ export default function Recommendation() {
           </button>
         </a>
       </div>
-      <div className="ml-4 text-2xl font-bold text-black">For You Today</div>
-      <MovieRecomendation movieId={"1000011"} />
-      <MovieRecomendation movieId={"1000001"} />
-      <MovieRecomendation movieId={"1000004"} />
-      <MovieRecomendation movieId={"1000015"} />
-      <MovieRecomendation movieId={"1000013"} />
-      <MovieRecomendation movieId={"1000012"} />
+      <div className="ml-4 text-2xl font-bold text-black">
+        Based on your Preference
+      </div>
+      <MovieRecomendationByActorGenre
+        actor={["Tom Hanks", "Leonardo DiCaprio"]}
+        genre={["Drama", "Action"]}
+      />
+      <div className="ml-4 text-2xl font-bold text-black">
+        Movie from your neighbor
+      </div>
+      <MovieRecomendationByLocation params={country} />
+
+      {userMovie.data?.map((val) => {
+        return (
+          <>
+            <MovieRecomendation movieId={val.movieId} refName={val.name} />{" "}
+          </>
+        );
+      })}
     </>
   );
 }
