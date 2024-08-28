@@ -2,114 +2,62 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { api } from "~/trpc/react";
+import { useSession } from "next-auth/react";
 
 export default function GenrePage() {
+  const router = useRouter();
+  const { data, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/api/auth/signin");
+      window.location.reload();
+    },
+  });
+  const user = data?.user;
+
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
   const [movies, setMovies] = useState<
-    { title: string; poster: string; synopsis: string }[]
+    { id: string; name: string; link: string; rating: string }[]
   >([]); // State for movies
   const [selectedMovie, setSelectedMovie] = useState<{
-    title: string;
-    poster: string;
-    synopsis: string;
+    id: string;
+    name: string;
+    link: string;
+    rating: string;
   } | null>(null); // State for selected movie
-  const router = useRouter();
 
-  const genres: string[] = [
-    "Romance",
-    "Action",
-    "Fantasy",
+  const genres = [
+    "Comedy",
+    "Adventure",
     "Thriller",
     "Drama",
-    "Comedy",
-    "Horror",
-    "Adventure",
+    "Science Fiction",
+    "Action",
+    "Music",
+    "Romance",
+    "History",
+    "Crime",
+    "Animation",
     "Mystery",
+    "Horror",
+    "Family",
+    "Fantasy",
+    "War",
+    "Western",
+    "TV Movie",
+    "Documentary",
   ];
 
-  const genremovies: {
-    [key: string]: { title: string; poster: string; synopsis: string }[];
-  } = {
-    Romance: [
-      {
-        title: "Romantic Movie 1",
-        poster: "https://via.placeholder.com/150x220?text=Romantic+Movie+1",
-        synopsis: "Synopsis for Romantic Movie 1",
-      },
-      {
-        title: "Romantic Movie 2",
-        poster: "https://via.placeholder.com/150x220?text=Romantic+Movie+2",
-        synopsis: "Synopsis for Romantic Movie 2",
-      },
-      {
-        title: "Romantic Movie 3",
-        poster: "https://via.placeholder.com/150x220?text=Romantic+Movie+3",
-        synopsis: "Synopsis for Romantic Movie 3",
-      },
-    ],
-    Action: [
-      {
-        title: "Action Movie 1",
-        poster: "https://via.placeholder.com/150x220?text=Action+Movie+1",
-        synopsis: "Synopsis for Action Movie 1",
-      },
-      {
-        title: "Action Movie 2",
-        poster: "https://via.placeholder.com/150x220?text=Action+Movie+2",
-        synopsis: "Synopsis for Action Movie 2",
-      },
-      {
-        title: "Action Movie 3",
-        poster: "https://via.placeholder.com/150x220?text=Action+Movie+3",
-        synopsis: "Synopsis for Action Movie 3",
-      },
-    ],
-  };
+  const genremovies = genres.reduce((acc, genre) => {
+    acc[genre] = api.movie.getMovieByGenreList.useQuery({ genre }).data?.list;
+    return acc;
+  }, {});
 
-  const mostPopularMovies: {
-    title: string;
-    poster: string;
-    synopsis: string;
-  }[] = [
-    {
-      title: "Popular Movie 1",
-      poster: "https://via.placeholder.com/150x220?text=Popular+Movie+1",
-      synopsis: "Synopsis for Popular Movie 1",
-    },
-    {
-      title: "Popular Movie 2",
-      poster: "https://via.placeholder.com/150x220?text=Popular+Movie+2",
-      synopsis: "Synopsis for Popular Movie 2",
-    },
-    {
-      title: "Popular Movie 3",
-      poster: "https://via.placeholder.com/150x220?text=Popular+Movie+3",
-      synopsis: "Synopsis for Popular Movie 3",
-    },
-  ];
+  const mostPopularMovies = api.movie.getPopularMovie.useQuery().data?.list;
 
-  const newReleaseMovies: {
-    title: string;
-    poster: string;
-    synopsis: string;
-  }[] = [
-    {
-      title: "New Release 1",
-      poster: "https://via.placeholder.com/150x220?text=New+Release+1",
-      synopsis: "Synopsis for New Release 1",
-    },
-    {
-      title: "New Release 2",
-      poster: "https://via.placeholder.com/150x220?text=New+Release+2",
-      synopsis: "Synopsis for New Release 2",
-    },
-    {
-      title: "New Release 3",
-      poster: "https://via.placeholder.com/150x220?text=New+Release+3",
-      synopsis: "Synopsis for New Release 3",
-    },
-  ];
+  const newReleaseMovies = api.movie.getLatestMovie.useQuery().data?.list;
 
   const handleSectionClick = (section: string) => {
     setSelectedSection(section);
@@ -131,20 +79,19 @@ export default function GenrePage() {
   };
 
   const handleMovieClick = (movie: {
-    title: string;
-    poster: string;
-    synopsis: string;
+    id: string;
+    name: string;
+    link: string;
+    rating: string;
   }) => {
     setSelectedMovie(movie);
   };
-
-  const closeModal = () => {
-    setSelectedMovie(null);
-  };
-
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
   return (
     <div
-      className={`relative flex ${selectedSection === "Genres" ? "h-full" : "h-screen"} bg-gray-100 pt-16`}
+      className={`relative flex ${selectedSection === null ? "h-screen" : "h-full"} bg-gray-100 pt-16`}
     >
       {/* Sidebar */}
       <div className="w-1/4 rounded-lg bg-white p-6 shadow-md">
@@ -198,22 +145,20 @@ export default function GenrePage() {
               <h2 className="text-3xl font-bold text-gray-800">
                 Most Popular Movies
               </h2>
-              <div className="mt-4 grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-4">
+              <div className="mt-4 grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-5">
                 {movies.map((movie) => (
-                  <div
-                    key={movie.title}
-                    className="cursor-pointer text-center"
-                    onClick={() => handleMovieClick(movie)}
-                  >
-                    <img
-                      src={movie.poster}
-                      alt={movie.title}
-                      className="mx-auto h-auto w-32 rounded-lg shadow-md"
-                    />
-                    <h3 className="mx-auto mt-2 w-32 text-lg font-semibold text-gray-800">
-                      {movie.title}
-                    </h3>
-                  </div>
+                  <a href={`http://localhost:3000/movie-details/${movie.id}`}>
+                    <div className="cursor-pointer text-center hover:scale-105">
+                      <img
+                        src={movie.link}
+                        alt={movie.name}
+                        className="mx-auto h-auto w-32 rounded-lg shadow-md"
+                      />
+                      <h3 className="mx-auto mt-2 w-32 text-lg font-semibold text-gray-800">
+                        {movie.name}
+                      </h3>
+                    </div>
+                  </a>
                 ))}
               </div>
             </>
@@ -223,22 +168,23 @@ export default function GenrePage() {
               <h2 className="text-3xl font-bold text-gray-800">
                 New Release Movies
               </h2>
-              <div className="mt-4 grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-4">
+              <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-5">
                 {movies.map((movie) => (
-                  <div
-                    key={movie.title}
-                    className="cursor-pointer text-center"
-                    onClick={() => handleMovieClick(movie)}
-                  >
-                    <img
-                      src={movie.poster}
-                      alt={movie.title}
-                      className="mx-auto h-auto w-32 rounded-lg shadow-md"
-                    />
-                    <h3 className="mx-auto mt-2 w-32 text-lg font-semibold text-gray-800">
-                      {movie.title}
-                    </h3>
-                  </div>
+                  <a href={`http://localhost:3000/movie-details/${movie.id}`}>
+                    <div
+                      key={movie.id}
+                      className="cursor-pointer text-center hover:scale-105"
+                    >
+                      <img
+                        src={movie.link}
+                        alt={movie.name}
+                        className="mx-auto h-auto w-32 rounded-lg shadow-md"
+                      />
+                      <h3 className="mx-auto mt-2 w-32 text-sm font-semibold text-gray-800">
+                        {movie.name}
+                      </h3>
+                    </div>
+                  </a>
                 ))}
               </div>
             </>
@@ -250,20 +196,21 @@ export default function GenrePage() {
               </h2>
               <div className="mt-4 grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-4">
                 {movies.map((movie) => (
-                  <div
-                    key={movie.title}
-                    className="cursor-pointer text-center"
-                    onClick={() => handleMovieClick(movie)}
-                  >
-                    <img
-                      src={movie.poster}
-                      alt={movie.title}
-                      className="mx-auto h-auto w-32 rounded-lg shadow-md"
-                    />
-                    <h3 className="mx-auto mt-2 w-32 text-lg font-semibold text-gray-800">
-                      {movie.title}
-                    </h3>
-                  </div>
+                  <a href={`http://localhost:3000/movie-details/${movie.id}`}>
+                    <div
+                      key={movie.id}
+                      className="cursor-pointer text-center hover:scale-105"
+                    >
+                      <img
+                        src={movie.link}
+                        alt={movie.name}
+                        className="mx-auto h-auto w-32 rounded-lg shadow-md"
+                      />
+                      <h3 className="mx-auto mt-2 w-32 text-lg font-semibold text-gray-800">
+                        {movie.name}
+                      </h3>
+                    </div>
+                  </a>
                 ))}
               </div>
             </>
@@ -277,31 +224,6 @@ export default function GenrePage() {
             </h2>
           )}
         </div>
-
-        {/* Movie Synopsis Modal */}
-        {selectedMovie && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-              <h2 className="text-3xl font-bold text-gray-800">
-                {selectedMovie.title}
-              </h2>
-              <img
-                src={selectedMovie.poster}
-                alt={selectedMovie.title}
-                className="mt-4 h-auto w-full rounded-lg shadow-md"
-              />
-              <p className="mt-4 text-lg text-gray-700">
-                {selectedMovie.synopsis}
-              </p>
-              <button
-                className="mt-6 rounded-lg bg-gray-800 px-4 py-2 text-white hover:bg-gray-700"
-                onClick={closeModal}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
