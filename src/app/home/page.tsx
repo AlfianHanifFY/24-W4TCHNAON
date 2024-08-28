@@ -1,15 +1,6 @@
 export default async function HomePage() {
     return(
-    <main className="p-0 m-0 box-border bg-black text-white">
-        <nav className="flex justify-between text-center p-4 fixed w-full z-20 bg-black bg-opacity-50">
-            <a className="text-5xl text-red-600 ml-4">W4CTHNAON</a>
-            <div className="">
-                <a className="text-white inline-block mt-2 mr-8 ml-8 text-xl">Home</a>
-                <a className="text-white inline-block mt-2 mr-8 ml-8 text-xl">Trend</a>
-                <a className="text-white inline-block mt-2 mr-8 ml-8 text-xl">My List</a>
-                <a className="text-white inline-block mt-2 mr-8 ml-8 text-xl">Log Out</a>
-            </div>
-        </nav>
+    <main className="p-0 m-0 box-border bg-black text-white font-ysabeau">
         <div className="overflow-hidden w-full relative z-10">
             <div className="flex w-full">
                 <div className="flex-grow-0 flex-shrink-0 basis-full">
@@ -22,7 +13,7 @@ export default async function HomePage() {
                     <img className="w-full h-auto" src="/img/got.png" alt="" />
                 </div>
                 <div className="w-2/4 absolute z-50 top-40 ml-80">
-                    <h4>Welcome to W4CTHNAON</h4>
+                    <h4 className="text-2xl">Welcome to W4CTHNAON</h4>
                     <h1 className="text-5xl">Reviews Your Favorite Movies</h1>
                     <h1 className="text-5xl">Make Your Own Playlist</h1>
                     <p>Immerse yourself in the world of cinema with our comprehensive platform designed for movie enthusiasts of all kinds. Whether you’re a casual viewer or a dedicated film critic, our website offers everything you need to make informed decisions about what to watch next. Dive into our extensive library of film reviews, explore movies through tailored search filters, and create custom playlists that suit your unique taste.</p>
@@ -33,98 +24,12 @@ export default async function HomePage() {
             </div>
             
             {/* Main */}
-            <div className="w-full relative flex">
-                <img className="w-full h-auto opacity-10" src="/img/background-home.jpg"/>
-                <div className=" mr-12 w-full absolute mt-20 mb-24">
-                <div className="w-full pr-28 pl-28 pb-32 pt-12">
-                    <h1 className="text-white items-center justify-center text-center">Hello, Cinephiles!</h1>
-                    <p className="text-white items-center justify-center text-center">Looking for the next great film to watch? Our movie review website is your go-to destination! Discover honest and in-depth reviews from fellow movie enthusiasts, helping you find the perfect film for any mood. Whether you're into action-packed blockbusters, heartwarming dramas, or hidden indie gems, our platform makes it easy to explore, rate, and share your favorite films. Join a community of passionate cinephiles, dive into engaging discussions, and make informed decisions on your next movie night. Start your cinematic adventure with us today and never miss a must-watch movie again!</p>
-                </div>
-                <div className="z-50 block absolute text-4xl items-center ml-14 justify-center w-full">Top 10 Movies</div>
-                    <div className="space-x-4 py-5 w-11/12 h-96 ml-14 mt-16 flex overflow-x-auto  ">
-                        <div className="p-1 min-w-[144px] text-center">
-                            <img className=" w-full h-52 rounded-3xl" src="/img/sample-trend.jpg" alt="Sample" />
-                            <div className="mt-1 w-full bg-red-700 p-1 rounded-2xl justify-center items-center flex">Action</div>
-                            <h1 className="font-bold pb-0">Film</h1>
-                            <p className="pt-0">2022</p>
-                        </div>
-                        <div className="p-1 min-w-[144px] text-center">
-                            <img className=" w-full h-56 rounded-3xl" src="/img/sample-trend.jpg" alt="Sample" />
-                            <div className="mt-1 w-full bg-red-700 p-1 rounded-2xl justify-center items-center flex">Action</div>
-                            <h1 className="font-bold pb-0">Film</h1>
-                            <p className="pt-0">2022</p>
-                        </div>
-                        <div className="p-1 min-w-[144px] text-center">
-                            <img className=" w-full h-56 rounded-3xl" src="/img/sample-trend.jpg" alt="Sample" />
-                            <div className="mt-1 w-full bg-red-700 p-1 rounded-2xl justify-center items-center flex">Action</div>
-                            <h1 className="font-bold pb-0">Film</h1>
-                            <p className="pt-0">2022</p>
-                        </div>
-                        <div className="p-1 min-w-[144px] text-center">
-                            <img className=" w-full h-56 rounded-3xl" src="/img/sample-trend.jpg" alt="Sample" />
-                            <div className="mt-1 w-full bg-red-700 p-1 rounded-2xl justify-center items-center flex">Action</div>
-                            <h1 className="font-bold pb-0">Film</h1>
-                            <p className="pt-0">2022</p>
-                        </div>
-                        <div className="p-1 min-w-[144px] text-center">
-                            <img className=" w-full h-56 rounded-3xl" src="/img/sample-trend.jpg" alt="Sample" />
-                            <div className="mt-1 w-full bg-red-700 p-1 rounded-2xl justify-center items-center flex">Action</div>
-                            <h1 className="font-bold pb-0">Film</h1>
-                            <p className="pt-0">2022</p>
-                        </div>
-                        <div className="p-1 min-w-[144px] text-center">
-                            <img className=" w-full h-56 rounded-3xl" src="/img/sample-trend.jpg" alt="Sample" />
-                            <div className="mt-1 w-full bg-red-700 p-1 rounded-2xl justify-center items-center flex">Action</div>
-                            <h1 className="font-bold pb-0">Film</h1>
-                            <p className="pt-0">2022</p>
-                        </div>
-                        <div className="p-1 min-w-[144px] text-center">
-                            <img className=" w-full h-56 rounded-3xl" src="/img/sample-trend.jpg" alt="Sample" />
-                            <div className="mt-1 w-full bg-red-700 p-1 rounded-2xl justify-center items-center flex">Action</div>
-                            <h1 className="font-bold pb-0">Film</h1>
-                            <p className="pt-0">2022</p>
-                        </div>
-                        <div className="p-1 min-w-[144px] text-center">
-                            <img className=" w-full h-56 rounded-3xl" src="/img/sample-trend.jpg" alt="Sample" />
-                            <div className="mt-1 w-full bg-red-700 p-1 rounded-2xl justify-center items-center flex">Action</div>
-                            <h1 className="font-bold pb-0">Film</h1>
-                            <p className="pt-0">2022</p>
-                        </div>
-                        <div className="p-1 min-w-[144px] text-center">
-                            <img className=" w-full h-56 rounded-3xl" src="/img/sample-trend.jpg" alt="Sample" />
-                            <div className="mt-1 w-full bg-red-700 p-1 rounded-2xl justify-center items-center flex">Action</div>
-                            <h1 className="font-bold pb-0">Film</h1>
-                            <p className="pt-0">2022</p>
-                        </div>
-                        <div className="p-1 min-w-[144px] text-center">
-                            <img className=" w-full h-56 rounded-3xl" src="/img/sample-trend.jpg" alt="Sample" />
-                            <div className="mt-1 w-full bg-red-700 p-1 rounded-2xl justify-center items-center flex">Action</div>
-                            <h1 className="font-bold pb-0">Film</h1>
-                            <p className="pt-0">2022</p>
-                        </div>
-                </div>
-                    <div className="bg-white bg-opacity-20 flex w-full h-60 relative items-center z-10 opacity-100 mt-20 mb-20">
-                        <div className="w-4/5 h-auto m-12">
-                            <h1>Create Your Own Playlist</h1>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam voluptatem illo iste blanditiis odio? Amet molestias laboriosam quae debitis et sint commodi! Autem doloremque aperiam esse incidunt iure deleniti illum?</p>
-                        </div>
-                        <div className="flex h-autojustify-center items-center m-8">
-                            <div className="w-40 h-40 m-1 rounded-lg block justify-center items-center relative">
-                                <img className="w-full h-40 object-cover relative z-10 opacity-100 " src="/img/playlist-sample.jpg" alt="" />
-                                <h1 className="ml-8 text-base">My Playlist</h1>
-                            </div>
-                            <div className="w-40 h-40 m-1 rounded-lg block justify-center items-center relative">
-                                <img className="w-full h-40 object-cover relative z-10 opacity-100 " src="/img/playlist-sample.jpg" alt="" />
-                                <h1 className="ml-8 text-base">My Playlist</h1>
-                            </div>
-                            <div className="w-40 h-40 m-1 rounded-lg block justify-center items-center relative">
-                                <img className="w-full h-40 object-cover relative z-10 opacity-100 " src="/img/playlist-sample.jpg" alt="" />
-                                <h1 className="ml-8 text-base">My Playlist</h1>
-                            </div>
-                            <div className=""></div>
-                        </div>
-                    </div>
-                    {/* Kurang Scrollbar */}
+            <div className="w-full relative">
+                <img className="w-full h-auto opacity-10 absolute" src="/img/background-home.jpg"/>
+                <div className="text-white z-10 w-full relative p-20 bg-white bg-opacity-20">
+                    <h1 className=" items-center justify-center text-center text-2xl">Hello, Cinephiles!</h1>
+                    <p className=" items-center justify-center text-center">Looking for the next great film to watch? Our movie review website is your go-to destination! Discover honest and in-depth reviews from fellow movie enthusiasts, helping you find the perfect film for any mood. Whether you're into action-packed blockbusters, heartwarming dramas, or hidden indie gems, our platform makes it easy to explore, rate, and share your favorite films. Join a community of passionate cinephiles, dive into engaging discussions, and make informed decisions on your next movie night. Start your cinematic adventure with us today and never miss a must-watch movie again!</p>
+                </div>                    
                     <div className="z-50 justify-center w-full h-12 relative mt-8 p-4 flex items-center">
                         <a className="text-white text-2xl" href="">See All Recomendation</a>
                     </div>
@@ -265,8 +170,96 @@ export default async function HomePage() {
                         </p>
                     </div>
                 </div>
+                <div>
+                    <h1 className="text-white flex justify-center items-center font-bold text-2xl">Team Collaborators</h1>
+                </div>
+                <div className="p-4 pr-32 pl-32 h-auto mb-20 flex flex-wrap relative overflow-y-hidden justify-center items-center">
+                    <div className="w-32 h-40 relative rounded-xl m-4">
+                        <img className="w-auto h-auto" src="/img/surya.png" alt="" />
+                        <div>
+                            <h1 className="text-white font-medium text-sm mt-2">Surya Suharna</h1>
+                            <p className="text-white text-xs italic">Frontend Developer</p>
+                        </div>
+                    </div>
+                    <div className="w-32 h-40 relative rounded-xl m-4">
+                        <img className="w-auto h-auto" src="/img/soni.png" alt="" />
+                        <div>
+                            <h1 className="text-white font-medium text-sm mt-2">Ahmad Wicaksono</h1>
+                            <p className="text-white text-xs italic">Frontend Developer</p>
+                        </div>
+                    </div>
+                    <div className="w-32 h-40 relative rounded-xl m-4">
+                        <img className="w-auto h-auto" src="/img/kaindra.png" alt="" />
+                        <div>
+                            <h1 className="text-white font-medium text-sm mt-2">Bayu Kaindra</h1>
+                            <p className="text-white text-xs italic">Frontend Developer</p>
+                        </div>
+                    </div>
+                    <div className="w-32 h-40 relative rounded-xl m-4">
+                        <img className="w-auto h-auto" src="/img/persada.png" alt="" />
+                        <div>
+                            <h1 className="text-white font-medium text-sm mt-2">Persada Ramiiza</h1>
+                            <p className="text-white text-xs italic">Frontend Developer</p>
+                        </div>
+                    </div>
+                    <div className="w-32 h-40 relative rounded-xl m-4">
+                        <img className="w-auto h-auto" src="/img/surya.png" alt="" />
+                        <div>
+                            <h1 className="text-white font-medium text-sm mt-2">Heleni Gratia</h1>
+                            <p className="text-white text-xs italic">Frontend Developer</p>
+                        </div>
+                    </div>
+                    <div className="w-32 h-40 relative rounded-xl m-4">
+                        <img className="w-auto h-auto" src="/img/alfian.png" alt="" />
+                        <div>
+                            <h1 className="text-white font-medium text-sm mt-2">Alfian Hanif</h1>
+                            <p className="text-white text-xs italic">Backend Developer</p>
+                        </div>
+                    </div>
+                    <div className="w-32 h-40 relative rounded-xl m-4">
+                        <img className="w-auto h-auto" src="/img/alfian.png" alt="" />
+                        <div>
+                            <h1 className="text-white font-medium text-sm mt-2">Rafen Max</h1>
+                            <p className="text-white text-xs italic">Data Science</p>
+                        </div>
+                    </div>
+                    <div className="w-32 h-40 relative rounded-xl m-4">
+                        <img className="w-auto h-auto" src="/img/alfian.png" alt="" />
+                        <div>
+                            <h1 className="text-white font-medium text-sm mt-2">Kenlyn Tesalonika</h1>
+                            <p className="text-white text-xs italic">Data Science</p>
+                        </div>
+                    </div>
+                    <div className="w-32 h-40 relative rounded-xl m-4">
+                        <img className="w-auto h-auto" src="/img/alfian.png" alt="" />
+                        <div>
+                            <h1 className="text-white font-medium text-sm mt-2">Amudi Purba</h1>
+                            <p className="text-white text-xs italic">Data Science</p>
+                        </div>
+                    </div>
+                    <div className="w-32 h-40 relative rounded-xl m-4">
+                        <img className="w-auto h-auto" src="/img/alfian.png" alt="" />
+                        <div>
+                            <h1 className="text-white font-medium text-sm mt-2">Irdina Ilmuna</h1>
+                            <p className="text-white text-xs italic">Product Manager</p>
+                        </div>
+                    </div>
+                    <div className="w-32 h-40 relative rounded-xl m-4">
+                        <img className="w-auto h-auto" src="/img/alfian.png" alt="" />
+                        <div>
+                            <h1 className="text-white font-medium text-sm mt-2">Sonya Putri</h1>
+                            <p className="text-white text-xs italic">UI/UX Designer</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="justify-center items-center relative flex mb-8">
+                    <div className="block">
+                        <h1 className="text-white font-light text-sm mt-2 justify-center items-center flex">© School of Electrical Engineering and Informatics - Computing 2023</h1>
+                        <p className="text-white text-xs italic flex justify-center items-center ">Bandung Institute of Technology</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        
     </main>
     
 ) 
