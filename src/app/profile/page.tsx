@@ -25,21 +25,21 @@ export default function ProfilePage() {
       {/* left navbar */}
       <div className="h-screen w-1/4 bg-[#B3B3B3]">
         <a
-          href="http://localhost:3000/profile"
+          href="http://https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/profile"
           className="mt-16 flex h-14 w-full items-center justify-center bg-[#555555]"
         >
           <i className="bx bxs-user absolute left-4 text-2xl"></i>
           <p className="">USER INFO</p>
         </a>
         <a
-          href="http://localhost:3000/profile/favorite"
+          href="http://https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/profile/favorite"
           className="my-4 flex h-14 w-full items-center justify-center"
         >
           <i className="bx bxs-heart absolute left-4 text-2xl"></i>
           <p className="">FAVORITE</p>
         </a>
         <a
-          href="http://localhost:3000/profile/watch-later"
+          href="http://https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/profile/watch-later"
           className="my-4 flex h-14 w-full items-center justify-center"
         >
           <i className="bx bxs-star absolute left-4 text-2xl"></i>

@@ -4,7 +4,7 @@ import { appRouter } from "../../../server/api/root";
 
 export function GET(_: NextRequest) {
   const panelHtml = renderTrpcPanel(appRouter, {
-    url: "http://localhost:3000/api/trpc",
+    url: "http://https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/api/trpc",
     transformer: "superjson",
   });
 
