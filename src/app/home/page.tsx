@@ -203,7 +203,7 @@ export default async function HomePage() {
                         </div>
                     </div>
                     <div className="w-32 h-40 relative rounded-xl m-4">
-                        <img className="w-auto h-auto" src="/img/surya.png" alt="" />
+                        <img className="w-auto h-auto" src="/img/heleni.png" alt="" />
                         <div>
                             <h1 className="text-white font-medium text-sm mt-2">Heleni Gratia</h1>
                             <p className="text-white text-xs italic">Frontend Developer</p>
@@ -217,35 +217,35 @@ export default async function HomePage() {
                         </div>
                     </div>
                     <div className="w-32 h-40 relative rounded-xl m-4">
-                        <img className="w-auto h-auto" src="/img/alfian.png" alt="" />
+                        <img className="w-auto h-auto" src="/img/rafen.png" alt="" />
                         <div>
                             <h1 className="text-white font-medium text-sm mt-2">Rafen Max</h1>
                             <p className="text-white text-xs italic">Data Science</p>
                         </div>
                     </div>
                     <div className="w-32 h-40 relative rounded-xl m-4">
-                        <img className="w-auto h-auto" src="/img/alfian.png" alt="" />
+                        <img className="w-auto h-auto" src="/img/kenlyn.png" alt="" />
                         <div>
                             <h1 className="text-white font-medium text-sm mt-2">Kenlyn Tesalonika</h1>
                             <p className="text-white text-xs italic">Data Science</p>
                         </div>
                     </div>
                     <div className="w-32 h-40 relative rounded-xl m-4">
-                        <img className="w-auto h-auto" src="/img/alfian.png" alt="" />
+                        <img className="w-auto h-auto" src="/img/amudi.png" alt="" />
                         <div>
                             <h1 className="text-white font-medium text-sm mt-2">Amudi Purba</h1>
                             <p className="text-white text-xs italic">Data Science</p>
                         </div>
                     </div>
                     <div className="w-32 h-40 relative rounded-xl m-4">
-                        <img className="w-auto h-auto" src="/img/alfian.png" alt="" />
+                        <img className="w-auto h-auto" src="/img/irdina.png" alt="" />
                         <div>
                             <h1 className="text-white font-medium text-sm mt-2">Irdina Ilmuna</h1>
                             <p className="text-white text-xs italic">Product Manager</p>
                         </div>
                     </div>
                     <div className="w-32 h-40 relative rounded-xl m-4">
-                        <img className="w-auto h-auto" src="/img/alfian.png" alt="" />
+                        <img className="w-auto h-auto" src="/img/sonya.png" alt="" />
                         <div>
                             <h1 className="text-white font-medium text-sm mt-2">Sonya Putri</h1>
                             <p className="text-white text-xs italic">UI/UX Designer</p>
