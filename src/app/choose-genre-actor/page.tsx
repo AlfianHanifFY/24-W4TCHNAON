@@ -59,8 +59,6 @@ export default function Preference() {
     "Documentary",
   ];
   const countries = [
-    "UK",
-    "USA",
     "South Korea",
     "Germany",
     "Hong Kong",
@@ -218,7 +216,7 @@ export default function Preference() {
 
       {/* Countries */}
       <div className="flex flex-row justify-between pt-8">
-        <div className="text-2xl font-semibold">Your Favorite Country</div>
+        <div className="text-2xl font-semibold">Where You Live ?</div>
       </div>
       <>
         <div className="mt-4 grid grid-cols-4 gap-4 bg-white p-4">
