@@ -42,19 +42,28 @@ export const movieRouter = createTRPCRouter({
     }),
 
     getRecommendationByActorGenre: publicProcedure
-      .input(z.object({ actor : z.string(), genre : z.string() }))
-        .query(async ({ ctx, input }) => {
+      .input(z.object({ actor: z.string().array(), genre: z.string().array() }))
+      .query(async ({ ctx, input }) => {
         
 
         const fetchData = async () => {
-            const url = "http://localhost:8000/dataByActorGenre?" + "actor=" + input.actor + "&genre=" + input.genre;
-            console.log(url)
-            const response = await fetch(url);
-            const data = await response.json();
-            return data;
-          }
-        return await fetchData()
-    }),
+          const params = new URLSearchParams();
+        
+          input.actor.forEach(a => params.append('actor', a));
+          input.genre.forEach(g => params.append('genre', g));
+          
+          const url = `http://localhost:8000/dataByActorGenre?${params.toString()}`;
+        
+          console.log(url);
+        
+          const response = await fetch(url);
+          const data = await response.json();
+          return data;
+        };
+
+        return await fetchData();
+  }),
+
 
     getAllmovies: publicProcedure.query(async ({ ctx }) => {
       // Expected output: seluruh data course yang ada
@@ -161,6 +170,19 @@ export const movieRouter = createTRPCRouter({
         return {list : list}
     }),
 
+    getMoviePoster: publicProcedure
+    .input(z.object({movieId : z.string()}))
+      .query(async ({ ctx,input}) => {
+
+        const list = await ctx.db
+        .select({id : movies.id,name:movies.name,link:moviePosters.link,rating:movies.rating})
+        .from(movies)
+        .leftJoin(moviePosters, sql`${movies.id} = ${moviePosters.movieId}`)
+        .where(eq(movies.id,input.movieId))
+
+        return {list : list}
+    }),
+
     getRandomMovie: publicProcedure
       .query(async ({ ctx}) => {
 
@@ -209,6 +231,49 @@ export const movieRouter = createTRPCRouter({
       .where(eq(userWatchLater.userId,input.userId))
 
       return movie 
+    }),
+
+    getPopularMovie: publicProcedure
+      .query(async ({ ctx}) => {
+
+        const list = await ctx.db
+        .select({id : movies.id,name:movies.name,link:moviePosters.link,rating:movies.rating})
+        .from(movies)
+        .leftJoin(moviePosters, sql`${movies.id} = ${moviePosters.movieId}`)
+        .orderBy(sql`CAST(${movies.rating} AS FLOAT) DESC`)
+        .limit(100)
+
+
+        return {list : list}
+    }),
+
+    getLatestMovie: publicProcedure
+      .query(async ({ ctx}) => {
+
+        const list = await ctx.db
+        .select({id : movies.id,name:movies.name,link:moviePosters.link,rating:movies.rating})
+        .from(movies)
+        .leftJoin(moviePosters, sql`${movies.id} = ${moviePosters.movieId}`)
+        .orderBy(sql`CAST(${movies.date} AS FLOAT) DESC`)
+        .limit(100)
+
+
+        return {list}
+    }),
+    getMovieByGenreList: publicProcedure
+      .input(z.object({genre: z.string()}))
+      .query(async ({ ctx , input }) => {
+
+        const list = await ctx.db
+        .select({id : movies.id,name:movies.name,link:moviePosters.link,rating:movies.rating})
+        .from(movies)
+        .leftJoin(moviePosters, eq(movies.id,moviePosters.movieId))
+        .leftJoin(movieGenres,eq(movies.id,movieGenres.movieId))
+        .where(eq(movieGenres.genre,input.genre))
+        .limit(100)
+
+
+        return {list : list}
     }),
     
   });

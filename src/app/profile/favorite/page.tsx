@@ -12,6 +12,7 @@ export default function ProfilePage() {
     required: true,
     onUnauthenticated() {
       router.push("/api/auth/signin");
+      window.location.reload();
     },
   });
 

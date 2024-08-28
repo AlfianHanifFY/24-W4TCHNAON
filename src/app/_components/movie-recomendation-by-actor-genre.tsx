@@ -2,9 +2,10 @@
 
 import { api } from "~/trpc/react";
 
-export function MovieRecomendation({ movieId, refName }) {
-  const movies = api.movie.getRecommendationByMovie.useQuery({
-    movieId: movieId,
+export function MovieRecomendationByActorGenre({ actor, genre }) {
+  const movies = api.movie.getRecommendationByActorGenre.useQuery({
+    actor: actor,
+    genre: genre,
   });
 
   const id1 = movies.data?.movieRecomendation[0].id;
@@ -13,13 +14,41 @@ export function MovieRecomendation({ movieId, refName }) {
   const id4 = movies.data?.movieRecomendation[3].id;
   const id5 = movies.data?.movieRecomendation[4].id;
   const id6 = movies.data?.movieRecomendation[5].id;
+  const id7 = movies.data?.movieRecomendation[6].id;
+  const id8 = movies.data?.movieRecomendation[7].id;
+  const id9 = movies.data?.movieRecomendation[8].id;
+  const id10 = movies.data?.movieRecomendation[9].id;
+  const id11 = movies.data?.movieRecomendation[10].id;
+  const id12 = movies.data?.movieRecomendation[11].id;
+  const id13 = movies.data?.movieRecomendation[12].id;
+  const id14 = movies.data?.movieRecomendation[13].id;
+  const id15 = movies.data?.movieRecomendation[14].id;
+  const id16 = movies.data?.movieRecomendation[15].id;
+  const id17 = movies.data?.movieRecomendation[16].id;
+  const id18 = movies.data?.movieRecomendation[17].id;
 
-  const arr = [id1, id2, id3, id4, id5, id6];
+  const arr = [
+    id1,
+    id2,
+    id3,
+    id4,
+    id5,
+    id6,
+    id7,
+    id8,
+    id9,
+    id10,
+    id11,
+    id12,
+    id13,
+    id14,
+    id15,
+    id16,
+    id17,
+    id18,
+  ];
   return (
     <>
-      <div className="my-4 ml-4 text-2xl font-bold text-black">
-        <p>Because You Likes "{refName}"</p>
-      </div>
       <div className="mt-4 grid grid-cols-6 gap-4 bg-white p-4">
         {arr.map((id) => {
           const movie = api.movie.getMoviePoster.useQuery({ movieId: id });

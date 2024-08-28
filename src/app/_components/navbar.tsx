@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => pathname === path;
 
   const navLinks = [
-    { href: "/", label: "Home" },
+    { href: "/home", label: "Home" },
     { href: "/recommendation", label: "Recommendation" },
     { href: "/leaderboard", label: "Leaderboard" },
     { href: "/my-list", label: "My List" },
@@ -25,12 +25,7 @@ const Navbar: React.FC = () => {
   ];
 
   const handleReload = (href: string) => {
-    if (pathname === href) {
-      router.refresh();
-    } else {
-      router.push(href);
-      router.refresh();
-    }
+    router.push(href);
   };
 
   return (

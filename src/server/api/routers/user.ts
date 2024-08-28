@@ -4,7 +4,8 @@ import { createHash } from "crypto";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { userComments, userFavorite, users, userWatchLater } from "~/server/db/schema";
+import { userActor, userComments, userCountry, userFavorite, userGenre, users, userWatchLater } from "~/server/db/schema";
+import { Actor } from "next/font/google";
 
 export const userRouter = createTRPCRouter({
 
@@ -51,7 +52,9 @@ export const userRouter = createTRPCRouter({
   createComment: publicProcedure
     .input(z.object({ userId: z.string(),movieId : z.string(),comment: z.string() , parrent: z.string().optional()}))
     .mutation(async ({ ctx, input }) => {
-
+      if(input.comment == null || input.comment == ''){
+        return {'message' : 'comment null'}
+      }
       // ga ada parrent
       if(input.parrent == null){
         await ctx.db.insert(userComments).values({
@@ -75,6 +78,9 @@ export const userRouter = createTRPCRouter({
     .input(z.object({userId :z.string(),movieId : z.string()}))
     .mutation(async ({ctx,input})=>{
 
+      if(input.movieId == null || input.movieId == ''){
+        return {'message' : 'movieId null'}
+      }
       const movie = await ctx.db.select().from(userWatchLater).where(and(eq(userWatchLater.movieId,input.movieId),eq(userWatchLater.userId,input.userId)))
       
       if (movie.length == 0){
@@ -91,6 +97,9 @@ export const userRouter = createTRPCRouter({
     createFavorite: publicProcedure
     .input(z.object({userId :z.string(),movieId : z.string()}))
     .mutation(async ({ctx,input})=>{
+      if(input.movieId == null || input.movieId == ''){
+        return {'message' : 'movieId null'}
+      }
 
       const movie = await ctx.db.select().from(userFavorite).where(and(eq(userFavorite.movieId,input.movieId),eq(userFavorite.userId,input.userId)))
       
@@ -104,6 +113,67 @@ export const userRouter = createTRPCRouter({
       return {message: "new Favorite failed created"}
       
     }),
+
+    createUserActor: publicProcedure
+    .input(z.object({userId :z.string(),actor : z.string()}))
+    .mutation(async ({ctx,input})=>{
+
+      const movie = await ctx.db.select().from(userActor).where(and(eq(userActor.actor,input.actor),eq(userActor.userId,input.userId)))
+      
+      if (movie.length == 0){
+        await ctx.db.insert(userActor).values({
+          actor : input.actor,
+          userId : input.userId,
+        });
+        return {message: "new actor successfully created"}
+      }
+      return {message: "new actor failed created"}
+      
+    }),
+
+    createUserGenre: publicProcedure
+    .input(z.object({userId :z.string(),genre : z.string()}))
+    .mutation(async ({ctx,input})=>{
+
+      const movie = await ctx.db.select().from(userGenre).where(and(eq(userGenre.genre,input.genre),eq(userGenre.userId,input.userId)))
+      
+      if (movie.length == 0){
+        await ctx.db.insert(userGenre).values({
+          genre: input.genre,
+          userId : input.userId,
+        });
+        return {message: "new genre successfully created"}
+      }
+      return {message: "new genre failed created"}
+      
+    }),
+
+    createUserCountry: publicProcedure
+    .input(z.object({userId :z.string(),country : z.string()}))
+    .mutation(async ({ctx,input})=>{
+
+      const movie = await ctx.db.select().from(userCountry).where(eq(userCountry.userId,input.userId))
+      
+      if (movie.length == 0){
+        await ctx.db.insert(userCountry).values({
+          country : input.country,
+          userId : input.userId,
+        });
+        return {message: "new country successfully created"}
+      }
+      await ctx.db.update(userCountry).set({
+        country : input.country,
+        userId : input.userId,
+      }).where(eq(userCountry.userId,input.userId));
+      return {message: "new country updated"}
+      
+    }),
+
+    getUserCountry : publicProcedure
+    .input(z.object({userId : z.string()}))
+    .query(async ({ctx,input}) => {
+      return await ctx.db.select({country : userCountry.country}).from(userCountry).where(eq(userCountry.userId,input.userId))
+    })
 
     
 

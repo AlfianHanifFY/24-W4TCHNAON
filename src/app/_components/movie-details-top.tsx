@@ -22,7 +22,7 @@ export function MovieDetailsTop({ userId, id }) {
       {/* Box, Title, and Genres */}
       <div className="relative z-10 ml-20 mt-16 flex items-start space-x-4">
         <div className="flex flex-col">
-          <div className="box-content h-48 w-40 overflow-hidden rounded-md bg-[#a39494] shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 sm:h-52 sm:w-48 md:h-64 md:w-52">
+          <div className="box-content h-52 w-40 overflow-hidden rounded-md bg-[#a39494] shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 sm:h-52 sm:w-48 md:h-64 md:w-52">
             <img
               src={movie.data?.poster[0]?.link}
               alt="Movie Poster"
@@ -69,7 +69,13 @@ export function MovieDetailsTop({ userId, id }) {
           <div className="mt-16 flex flex-col text-center">
             <div className="flex cursor-pointer items-center justify-center space-x-2 rounded-lg bg-[#F5F5F5] px-5 py-4 font-normal text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
               <i className="bx bx-comment-detail"></i> {/* Icon */}
-              <a href="#">Show Comments</a>
+              <button
+                onClick={() => {
+                  window.location.reload();
+                }}
+              >
+                <a href="#">Show Comments</a>
+              </button>
             </div>
           </div>
         </div>
