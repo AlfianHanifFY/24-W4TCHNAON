@@ -108,7 +108,7 @@ export default function Random() {
             {/* Details (link to details movie) */}
             <div className="mt-3 pl-12">
               <a
-                href={`http://localhost:3000/movie-details/${id}`}
+                href={`movie-details/${id}`}
                 className="border-b-2 border-red-500 text-sm font-normal text-red-500"
               >
                 See Details

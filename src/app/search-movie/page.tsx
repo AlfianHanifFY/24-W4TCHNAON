@@ -147,7 +147,7 @@ export default function GenrePage() {
               </h2>
               <div className="mt-4 grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-5">
                 {movies.map((movie) => (
-                  <a href={`http://localhost:3000/movie-details/${movie.id}`}>
+                  <a href={`movie-details/${movie.id}`}>
                     <div className="cursor-pointer text-center hover:scale-105">
                       <img
                         src={movie.link}
@@ -170,7 +170,7 @@ export default function GenrePage() {
               </h2>
               <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-5">
                 {movies.map((movie) => (
-                  <a href={`http://localhost:3000/movie-details/${movie.id}`}>
+                  <a href={`movie-details/${movie.id}`}>
                     <div
                       key={movie.id}
                       className="cursor-pointer text-center hover:scale-105"
@@ -196,7 +196,7 @@ export default function GenrePage() {
               </h2>
               <div className="mt-4 grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-4">
                 {movies.map((movie) => (
-                  <a href={`http://localhost:3000/movie-details/${movie.id}`}>
+                  <a href={`movie-details/${movie.id}`}>
                     <div
                       key={movie.id}
                       className="cursor-pointer text-center hover:scale-105"

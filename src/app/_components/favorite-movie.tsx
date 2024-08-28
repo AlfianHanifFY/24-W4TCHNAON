@@ -9,8 +9,7 @@ export function FavoriteMovies({ id }) {
     <>
       <div className="mt-4 grid grid-cols-5 gap-4 bg-white p-4">
         {movie?.map((val) => {
-          const url_route =
-            "http://localhost:3000/movie-details/" + val.movieId;
+          const url_route = "movie-details/" + val.movieId;
           return (
             <div className="rounded-lg bg-white shadow-md hover:scale-105">
               <a href={url_route}>
