@@ -69,7 +69,13 @@ export function MovieDetailsTop({ userId, id }) {
           <div className="mt-16 flex flex-col text-center">
             <div className="flex cursor-pointer items-center justify-center space-x-2 rounded-lg bg-[#F5F5F5] px-5 py-4 font-normal text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
               <i className="bx bx-comment-detail"></i> {/* Icon */}
-              <a href="#">Show Comments</a>
+              <button
+                onClick={() => {
+                  window.location.reload();
+                }}
+              >
+                <a href="#">Show Comments</a>
+              </button>
             </div>
           </div>
         </div>
