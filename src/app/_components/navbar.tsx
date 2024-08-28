@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
               onClick={() => handleReload("/search-movie")}
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
+                xmlns="www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -87,7 +87,7 @@ const Navbar: React.FC = () => {
                 }`}
               >
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns="www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="white"
                   stroke="none"
@@ -110,7 +110,7 @@ const Navbar: React.FC = () => {
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 20"
-                xmlns="http://www.w3.org/2000/svg"
+                xmlns="www.w3.org/2000/svg"
               >
                 <path
                   strokeLinecap="round"
@@ -155,7 +155,7 @@ const Navbar: React.FC = () => {
             aria-label="Profile"
           >
             <svg
-              xmlns="http://www.w3.org/2000/svg"
+              xmlns="www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="white"
               stroke="none"
