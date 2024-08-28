@@ -32,7 +32,7 @@ export default function MovieLeaderboard() {
             2
           </div>
           <a
-            href={`http://https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${data.data?.list[1].id}`}
+            href={`https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${data.data?.list[1].id}`}
           >
             <img
               src={data.data?.list[1].link}
@@ -50,7 +50,7 @@ export default function MovieLeaderboard() {
             1
           </div>
           <a
-            href={`http://https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${data.data?.list[0].id}`}
+            href={`https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${data.data?.list[0].id}`}
           >
             <img
               src={data.data?.list[0].link}
@@ -69,7 +69,7 @@ export default function MovieLeaderboard() {
             3
           </div>
           <a
-            href={`http://https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${data.data?.list[2].id}`}
+            href={`https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${data.data?.list[2].id}`}
           >
             <img
               src={data.data?.list[2].link}
@@ -95,7 +95,7 @@ export default function MovieLeaderboard() {
               {rank + 4}
             </span>
             <a
-              href={`http://https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${val.id}`}
+              href={`https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${val.id}`}
             >
               <img
                 src={val.link}

@@ -54,7 +54,7 @@ export function MovieRecomendationByLocation({ params }) {
           const movie = api.movie.getMoviePoster.useQuery({ movieId: id });
           const url = movie.data?.list[0]?.link;
           const url_route =
-            "http://https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/" +
+            "https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/" +
             id;
           return (
             <div className="rounded-lg bg-white shadow-md hover:scale-105">
@@ -78,7 +78,7 @@ export function MovieRecomendationByLocation({ params }) {
                         }`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns="www.w3.org/2000/svg"
                       >
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.104 3.396a1 1 0 00.95.69h3.573c.969 0 1.371 1.24.588 1.81l-2.892 2.103a1 1 0 00-.364 1.118l1.104 3.396c.3.921-.755 1.688-1.538 1.118l-2.893-2.103a1 1 0 00-1.175 0l-2.892 2.103c-.783.57-1.838-.197-1.539-1.118l1.105-3.396a1 1 0 00-.364-1.118L2.336 8.823c-.783-.57-.381-1.81.588-1.81h3.573a1 1 0 00.95-.69l1.104-3.396z" />
                       </svg>

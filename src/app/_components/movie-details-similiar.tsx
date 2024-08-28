@@ -23,7 +23,7 @@ export function MovieDetailsSimiliar({ id }) {
         const url = movie.data?.poster[0]?.link;
         return (
           <a
-            href={`http://https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${id}`}
+            href={`https://24-w4-tchnaon-cls6-8kqvyiqyh-alfianhaniffys-projects.vercel.app/movie-details/${id}`}
           >
             <div className="hover:scale-105">
               <span className="box-content h-auto w-auto overflow-hidden rounded-md bg-[#B3B3B3] shadow-xl">
