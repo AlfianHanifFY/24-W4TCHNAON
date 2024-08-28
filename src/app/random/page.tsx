@@ -16,10 +16,10 @@ export default function Random() {
   });
   const user = sessionData?.user;
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState("?????");
   const [poster, setPoster] = useState("");
-  const [rating, setRating] = useState("");
-  const [description, setDescription] = useState("");
+  const [rating, setRating] = useState("??");
+  const [description, setDescription] = useState("???");
   const [id, setId] = useState("");
   const { data, refetch } = api.movie.getRandomMovie.useQuery();
   const createWatchLater = api.user.createWatchLater.useMutation();
