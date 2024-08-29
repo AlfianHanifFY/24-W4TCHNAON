@@ -23,7 +23,7 @@ export const movieRouter = createTRPCRouter({
             const data = await response.json();
             return data;
           }
-        return await fetchData()
+        return fetchData()
     }),
 
     getRecommendationByCountry: publicProcedure
@@ -38,7 +38,7 @@ export const movieRouter = createTRPCRouter({
             const data = await response.json();
             return data;
           }
-        return await fetchData()
+        return fetchData()
     }),
 
     getRecommendationByActorGenre: publicProcedure
@@ -61,7 +61,7 @@ export const movieRouter = createTRPCRouter({
           return data;
         };
 
-        return await fetchData();
+        return fetchData();
   }),
 
 
