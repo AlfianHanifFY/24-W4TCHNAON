@@ -3,11 +3,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { eq, sql } from "drizzle-orm";
 import { float } from "drizzle-orm/mysql-core";
+import { Actor } from "next/font/google";
 import { comment } from "postcss";
 import { string, z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { movieActors, movieCountries, movieGenres, moviePosters, movieReleases, movies,  movieStudios,  movieThemes,  posts, userComments, userFavorite, users, userWatchLater } from "~/server/db/schema";
+import { movieActors, movieCountries, movieGenres, moviePosters, movieReleases, movies,  movieStudios,  movieThemes,  posts, userActor, userComments, userFavorite, userGenre, users, userWatchLater } from "~/server/db/schema";
 
 export const movieRouter = createTRPCRouter({
 
@@ -23,7 +24,7 @@ export const movieRouter = createTRPCRouter({
             const data = await response.json();
             return data;
           }
-        return fetchData()
+        return await fetchData()
     }),
 
     getRecommendationByCountry: publicProcedure
@@ -38,7 +39,7 @@ export const movieRouter = createTRPCRouter({
             const data = await response.json();
             return data;
           }
-        return fetchData()
+        return await fetchData()
     }),
 
     getRecommendationByActorGenre: publicProcedure
@@ -61,7 +62,7 @@ export const movieRouter = createTRPCRouter({
           return data;
         };
 
-        return fetchData();
+        return await fetchData();
   }),
 
 
@@ -247,6 +248,25 @@ export const movieRouter = createTRPCRouter({
         return {list : list}
     }),
 
+    getPopularMovieRecomendation: publicProcedure.query(async ({ ctx }) => {
+
+      const list = await ctx.db
+        .select({
+          id: movies.id,
+          name: movies.name,
+          link: moviePosters.link,
+          rating: movies.rating,
+        })
+        .from(movies)
+        .leftJoin(moviePosters, sql`${movies.id} = ${moviePosters.movieId}`)
+        .orderBy(sql`RANDOM()`) 
+        .limit(300);
+
+      const sortedList = list.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+    
+      return { list: sortedList };
+    }),
+
     getLatestMovie: publicProcedure
       .query(async ({ ctx}) => {
 
@@ -275,5 +295,7 @@ export const movieRouter = createTRPCRouter({
 
         return {list : list}
     }),
+
+   
     
   });
