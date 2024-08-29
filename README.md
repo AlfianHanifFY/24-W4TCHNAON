@@ -11,3 +11,24 @@ Aplikasi ini dapat diakses dengan mudah melalui link `https://24-w4tchnaon.verce
 - menyiapkan database `yarn db:generate` `yarn db:migrate`
 - run pada lokal `yarn dev`
 - aplikasi sudah dapat digunakan
+
+## Docs
+ppt : https://www.canva.com/design/DAGPKXvrBj0/4E09YE21ygsW2W3XhMfbyQ/edit?utm_content=DAGPKXvrBj0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+## Contributor
+kelompok 24 <br>
+
+| **Name**                           | **Role**                               |
+|------------------------------------|----------------------------------------|
+| Irdina Ilmuna Yosapat (19623176)   | Product Management                     |
+| Surya Suharna (19623125)           | Software Engineer (Front End)          |
+| Ahmad Wicaksono (19623245)         | Software Engineer (Front End)          |
+| Heleni Gratia Meitrina T. (19623150)| Software Engineer (Front End)          |
+| Maheswara Bayu Kaindra (19623197)  | Software Engineer (Front End)          |
+| Alfian Hanif Fitria Yustanto (19623281)| Software Engineer (Back End)        |
+| Amudi Purba (19623108)             | Data Science                           |
+| Rafen Max Alessandro (19623301)    | Data Science                           |
+| Kenlyn Tesalonika Winata (19623270) | Data Science                          |
+| Persada Ramiiza Abyudaya (19623241) | Software Engineer (Front End)         |
+| Sonya Putri Fadilah (19623071)     | UI/UX                                  |
+
