@@ -173,8 +173,33 @@ export const userRouter = createTRPCRouter({
     .input(z.object({userId : z.string()}))
     .query(async ({ctx,input}) => {
       return await ctx.db.select({country : userCountry.country}).from(userCountry).where(eq(userCountry.userId,input.userId))
-    })
+    }),
 
+    getUserGenre : publicProcedure
+    .input(z.object({userId: z.string()}))
+    .query(async ({ ctx , input }) => {
+
+      const list = await ctx.db
+      .select({genre : userGenre.genre})
+      .from(userGenre)
+      .where(eq(userGenre.userId,input.userId))
+
+      return {list}
+  }),
+
+  getUserActor : publicProcedure
+    .input(z.object({userId: z.string()}))
+    .query(async ({ ctx , input }) => {
+
+      const list = await ctx.db
+      .select({actor : userActor.actor})
+      .from(userActor)
+      .where(eq(userActor.userId,input.userId))
+
+
+        
+      return {list}
+  }),
     
 
 });

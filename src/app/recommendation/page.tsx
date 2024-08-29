@@ -7,43 +7,29 @@ import { useSession } from "next-auth/react";
 import { MovieRecomendationByLocation } from "../_components/movie-recomendation-by-location";
 
 export default function Recommendation() {
-  const router = useRouter();
-  const { data, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push("/api/auth/signin");
-      window.location.reload();
-    },
-  });
-  const user = data?.user;
-  const country = api.user.getUserCountry.useQuery({ userId: user?.id });
-
-  const userMovie = api.movie.getFavorite.useQuery({ userId: user?.id });
-
+  const mostPopularMovies = api.movie.getPopularMovieRecomendation.useQuery();
   return (
-    <>
-      <div className="mb-20">navbar</div>
-      <div className="mb-3 ml-4">
-        <a href="choose-genre-actor">
-          <button>
-            <div className="flex items-center justify-center rounded-full border-2 border-[#BA0000] bg-[#F5F5F5] px-7 py-1 text-[#BA0000] hover:bg-[#BA0000] hover:text-white">
-              <i className="bx bx-refresh"></i> {/* Icon */}
-              Choose Your Preference
+    <div className="mt-8">
+      <h2 className="text-3xl font-bold text-gray-800">New Release Movies</h2>
+      <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6">
+        {mostPopularMovies.data?.list.map((movie) => (
+          <a href={`movie-details/${movie.id}`}>
+            <div
+              key={movie.id}
+              className="cursor-pointer text-center hover:scale-105"
+            >
+              <img
+                src={movie.link}
+                alt={movie.name}
+                className="mx-auto h-auto w-48 rounded-lg shadow-md"
+              />
+              <h3 className="mx-auto mt-2 w-32 text-sm font-semibold text-gray-800">
+                {movie.name}
+              </h3>
             </div>
-          </button>
-        </a>
+          </a>
+        ))}
       </div>
-      <div className="ml-4 text-2xl font-bold text-black">
-        Based on your Preference
-      </div>
-      <MovieRecomendationByActorGenre
-        actor={["Tom Hanks", "Leonardo DiCaprio"]}
-        genre={["Drama", "Action"]}
-      />
-      <div className="ml-4 text-2xl font-bold text-black">
-        Movie from your neighbor
-      </div>
-      <MovieRecomendationByLocation params={country} />
-    </>
+    </div>
   );
 }
