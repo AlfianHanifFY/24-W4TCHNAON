@@ -22,13 +22,15 @@ export default function RootLayout({
 
   return (
     <>
-      <html lang="en">
-        <body className={inter.className}>
-          <SessionProvider>
-            <ClientLayout>{children}</ClientLayout>
-          </SessionProvider>
-        </body>
-      </html>
+      {domLoaded && (
+        <html lang="en">
+          <body className={inter.className}>
+            <ClientLayout>
+              <SessionProvider>{children}</SessionProvider>
+            </ClientLayout>
+          </body>
+        </html>
+      )}
     </>
   );
 }
