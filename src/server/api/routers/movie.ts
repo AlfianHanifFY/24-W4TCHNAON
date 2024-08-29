@@ -11,13 +11,13 @@ import { movieActors, movieCountries, movieGenres, moviePosters, movieReleases, 
 
 export const movieRouter = createTRPCRouter({
 
+
   getRecommendationByMovie: publicProcedure
   .input(z.object({ movieId : z.string() }))
     .query(async ({ ctx, input }) => {
-        
 
         const fetchData = async () => {
-            const url = "http://103.157.97.145:8001/data?" + "movieId=" + input.movieId;
+            const url = "http://103.157.97.145:8001/data?" + "movieId=" + input.movieId ;
             console.log(url)
             const response = await fetch(url);
             const data = await response.json();
