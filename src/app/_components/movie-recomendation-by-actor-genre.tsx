@@ -26,6 +26,12 @@ export function MovieRecomendationByActorGenre({ actor, genre }) {
   const id16 = movies.data?.movieRecomendation[15].id;
   const id17 = movies.data?.movieRecomendation[16].id;
   const id18 = movies.data?.movieRecomendation[17].id;
+  const id19 = movies.data?.movieRecomendation[18].id;
+  const id20 = movies.data?.movieRecomendation[19].id;
+  const id21 = movies.data?.movieRecomendation[20].id;
+  const id22 = movies.data?.movieRecomendation[21].id;
+  const id23 = movies.data?.movieRecomendation[22].id;
+  const id24 = movies.data?.movieRecomendation[23].id;
 
   const arr = [
     id1,
@@ -46,6 +52,12 @@ export function MovieRecomendationByActorGenre({ actor, genre }) {
     id16,
     id17,
     id18,
+    id19,
+    id20,
+    id21,
+    id22,
+    id23,
+    id24,
   ];
   return (
     <>

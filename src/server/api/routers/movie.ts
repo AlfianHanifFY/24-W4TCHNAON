@@ -3,21 +3,22 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { eq, sql } from "drizzle-orm";
 import { float } from "drizzle-orm/mysql-core";
+import { Actor } from "next/font/google";
 import { comment } from "postcss";
 import { string, z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { movieActors, movieCountries, movieGenres, moviePosters, movieReleases, movies,  movieStudios,  movieThemes,  posts, userComments, userFavorite, users, userWatchLater } from "~/server/db/schema";
+import { movieActors, movieCountries, movieGenres, moviePosters, movieReleases, movies,  movieStudios,  movieThemes,  posts, userActor, userComments, userFavorite, userGenre, users, userWatchLater } from "~/server/db/schema";
 
 export const movieRouter = createTRPCRouter({
+
 
   getRecommendationByMovie: publicProcedure
   .input(z.object({ movieId : z.string() }))
     .query(async ({ ctx, input }) => {
-        
 
         const fetchData = async () => {
-            const url = "http://103.157.97.145:8001/data?" + "movieId=" + input.movieId;
+            const url = "http://103.157.97.145:8001/data?" + "movieId=" + input.movieId ;
             console.log(url)
             const response = await fetch(url);
             const data = await response.json();
@@ -247,6 +248,25 @@ export const movieRouter = createTRPCRouter({
         return {list : list}
     }),
 
+    getPopularMovieRecomendation: publicProcedure.query(async ({ ctx }) => {
+
+      const list = await ctx.db
+        .select({
+          id: movies.id,
+          name: movies.name,
+          link: moviePosters.link,
+          rating: movies.rating,
+        })
+        .from(movies)
+        .leftJoin(moviePosters, sql`${movies.id} = ${moviePosters.movieId}`)
+        .orderBy(sql`RANDOM()`) 
+        .limit(300);
+
+      const sortedList = list.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+    
+      return { list: sortedList };
+    }),
+
     getLatestMovie: publicProcedure
       .query(async ({ ctx}) => {
 
@@ -275,5 +295,7 @@ export const movieRouter = createTRPCRouter({
 
         return {list : list}
     }),
+
+   
     
   });

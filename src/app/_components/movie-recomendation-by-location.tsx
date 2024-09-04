@@ -5,7 +5,7 @@ import { api } from "~/trpc/react";
 
 export function MovieRecomendationByLocation({ params }) {
   const movies = api.movie.getRecommendationByCountry.useQuery({
-    country: "Hong Kong",
+    country: params,
   });
 
   const id1 = movies.data?.movieRecomendation[0].id;
