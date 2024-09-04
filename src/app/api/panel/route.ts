@@ -4,7 +4,7 @@ import { appRouter } from "../../../server/api/root";
 
 export function GET(_: NextRequest) {
   const panelHtml = renderTrpcPanel(appRouter, {
-    url: "http://localhost:3000/api/panel",
+    url: "http://localhost:3000/api/trpc",
     transformer: "superjson",
   });
 
