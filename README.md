@@ -4,7 +4,7 @@
 Aplikasi berbasis web yang Memberikan rekomendasi film yang tepat dan relevan berdasarkan preferensi pengguna serta menyediakan ulasan yang komprehensif untuk membantu mereka menemukan dan menikmati film dengan kualitas terbaik.
 
 ## How To Run
-Aplikasi ini dapat diakses dengan mudah melalui link `https://24-w4tchnaon.vercel.app` 
+Aplikasi ini dapat diakses dengan mudah melalui link `https://24-w4tchnaon-seven.vercel.app` 
 <br><br> atau melalui lokal:
 - Clone repository ini:
     ```bash
