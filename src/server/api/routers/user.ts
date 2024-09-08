@@ -2,7 +2,7 @@ import { hash, hashSync } from "bcryptjs";
 import { and, eq } from "drizzle-orm";
 import { createHash } from "crypto";
 import { z } from "zod";
-
+import { Random } from 'random-js';
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { userActor, userComments, userCountry, userFavorite, userGenre, users, userWatchLater } from "~/server/db/schema";
 import { Actor } from "next/font/google";
@@ -13,11 +13,14 @@ export const userRouter = createTRPCRouter({
     .input(z.object({ name: z.string().min(1),email: z.string().email(),password: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {
       const pw = createHash('sha256').update(input.password).digest('hex');
-
+      const random = new Random();
+      const arrAvatar = ['https://api.dicebear.com/9.x/thumbs/svg?seed=Felix','https://api.dicebear.com/9.x/thumbs/svg?seed=Tigger','https://api.dicebear.com/9.x/thumbs/svg?seed=Cleo','https://api.dicebear.com/9.x/thumbs/svg?seed=Boots','https://api.dicebear.com/9.x/thumbs/svg?seed=Zoey','https://api.dicebear.com/9.x/notionists/svg?seed=Felix','https://api.dicebear.com/9.x/notionists/svg?seed=Zoey','https://api.dicebear.com/9.x/notionists/svg?seed=Charlie']
+      const avatar = random.pick(arrAvatar)
       await ctx.db.insert(users).values({
         name: input.name,
         email: input.email,
-        password: pw
+        password: pw,
+        image:avatar,
       });
 
       return{ message: "new user successfully created"}
@@ -195,11 +198,34 @@ export const userRouter = createTRPCRouter({
       .select({actor : userActor.actor})
       .from(userActor)
       .where(eq(userActor.userId,input.userId))
-
-
-        
       return {list}
   }),
-    
 
-});
+  deleteUserFavorite : publicProcedure
+  .input(z.object({userId : z.string(), movieId : z.string()}))
+  .mutation(async ({ctx,input}) => {
+    await ctx.db
+        .delete(userFavorite)
+        .where(
+          and(
+            eq(userFavorite.userId,input.userId),
+            eq(userFavorite.movieId,input.movieId)
+          ))
+      return {message : "Movie successfully removed"}
+
+  }),
+
+  deleteUserWatchLater : publicProcedure
+  .input(z.object({userId : z.string(), movieId : z.string()}))
+  .mutation(async ({ctx,input}) => {
+    await ctx.db
+        .delete(userWatchLater)
+        .where(
+          and(
+            eq(userWatchLater.userId,input.userId),
+            eq(userWatchLater.movieId,input.movieId)
+          ))
+      return {message : "Movie successfully removed"}
+    }),
+
+})
