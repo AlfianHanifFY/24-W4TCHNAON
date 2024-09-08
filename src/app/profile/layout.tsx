@@ -17,10 +17,6 @@ export default function RootLayout({
   const [domLoaded, setDomLoaded] = useState(false);
 
   useEffect(() => {
-    setDomLoaded(true);
-  }, []);
-
-  useEffect(() => {
     setIsClient(true);
     setDomLoaded(true); // Setting the state to true after the component mounts
   }, []);
@@ -30,9 +26,7 @@ export default function RootLayout({
       {domLoaded && (
         <html lang="en">
           <body className={inter.className}>
-            <ClientLayout>
-              <SessionProvider>{children}</SessionProvider>
-            </ClientLayout>
+            <ClientLayout>{children}</ClientLayout>
           </body>
         </html>
       )}

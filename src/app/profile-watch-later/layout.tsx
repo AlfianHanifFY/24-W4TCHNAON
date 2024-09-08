@@ -30,9 +30,7 @@ export default function RootLayout({
       {domLoaded && (
         <html lang="en">
           <body className={inter.className}>
-            <ClientLayout>
-              <SessionProvider>{children}</SessionProvider>
-            </ClientLayout>
+            <ClientLayout>{children}</ClientLayout>
           </body>
         </html>
       )}

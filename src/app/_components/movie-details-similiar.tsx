@@ -18,15 +18,21 @@ export function MovieDetailsSimiliar({ id }) {
   const arr = [id1, id2, id3, id4, id5, id6, id7];
 
   return (
-    <div className="relative mt-16 flex space-x-7 pb-10">
+    <div className="mt-16 flex w-screen space-x-7 overflow-scroll pb-10 md:w-full">
       {arr.map((id) => {
         const movie = api.movie.getMovieDetail.useQuery({ movieId: id });
         const url = movie.data?.poster[0]?.link;
         return (
           <Link href={`/movie-details/${id}`}>
-            <div className="hover:scale-105">
-              <span className="box-content h-auto w-auto overflow-hidden rounded-md bg-[#B3B3B3] shadow-xl">
-                <img src={url} alt="Movie Poster" width={500} height={300} />
+            <div className="mt-4 w-32 hover:scale-105 md:w-auto">
+              <span className="box-content overflow-hidden rounded-md bg-[#B3B3B3] shadow-xl md:h-auto md:w-auto">
+                <img
+                  src={url}
+                  alt="Movie Poster"
+                  width={500}
+                  height={500}
+                  className="rounded-md"
+                />
               </span>
             </div>
           </Link>

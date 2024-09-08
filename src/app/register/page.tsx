@@ -13,7 +13,7 @@ export default function RegisterPage() {
           {/* left side */}
           <div className="p-4 md:p-6">
             <h2 className="mb-3 text-left font-mono text-xl font-bold">
-              Watchnaon (nanti pake logo)
+              W4TCHNAON
             </h2>
             <p className="mb-4 max-w-xs text-left font-sans font-light text-gray-300">
               Register to create your account
