@@ -160,6 +160,17 @@ export default async function HomePage() {
               </button>
             </div>
           </a>
+          <p className="mt-12 italic">
+            there might be an error when you try this app from phone, pls login
+            to avoid this :D
+          </p>
+          <a href="/login">
+            <div className="mt-6">
+              <button className="flex w-32 items-center justify-center space-x-2 rounded-xl border border-gray-600 bg-gray-800 bg-opacity-50 py-2 shadow-sm transition duration-150 hover:translate-y-0.5 hover:bg-red-600 hover:shadow-lg">
+                <span>Login</span>
+              </button>
+            </div>
+          </a>
           <div className="mt-56 flex-shrink-0 flex-grow-0 md:w-1/2">
             <h1 className="mb-8 flex items-center justify-center text-xl font-bold text-white md:text-2xl">
               Team Collaborators
