@@ -20,12 +20,20 @@ export default function MovieDetail({ params }) {
   return (
     <div>
       <MovieDetailsTop userId={data?.user?.id} id={id} />
-      <div className="absolute left-20 right-6 z-10 mt-48 h-0.5 bg-[#757575]">
+      <div className="z-10 mt-48 h-0.5 bg-[#757575] md:absolute md:left-20 md:right-6">
         <div className="absolute mt-3 items-center justify-between rounded-full bg-[#B3B3B3] px-8 py-1 font-normal italic">
-          Similar to {}
+          Similar to
         </div>
         <div className="absolute left-0 right-0 z-10 m-2 mt-14 h-0.5 bg-[#757575]"></div>
         {/* Box */}
+        <div className="hidden md:block">
+          <MovieDetailsSimiliar id={id} />
+          <div className="absolute left-0 right-0 z-10 m-2 h-0.5 bg-[#757575]"></div>
+          {/* Comment */}
+          <MovieDetailsComment userId={data?.user?.id} movieId={id} />
+        </div>
+      </div>
+      <div className="block w-screen md:hidden">
         <MovieDetailsSimiliar id={id} />
         <div className="absolute left-0 right-0 z-10 m-2 h-0.5 bg-[#757575]"></div>
         {/* Comment */}

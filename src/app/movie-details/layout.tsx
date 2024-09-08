@@ -49,9 +49,7 @@ export default function RootLayout({
             </nav>
           </div>
           <ClientLayout>
-            <SessionProvider>
-              <div className="pt-20">{children}</div>
-            </SessionProvider>
+            <div className="pt-20">{children}</div>
           </ClientLayout>
         </body>
       )}

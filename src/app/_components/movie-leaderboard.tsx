@@ -14,12 +14,6 @@ export default function MovieLeaderboard() {
 
   return (
     <main className="min-h-screen bg-gray-50 p-8">
-      <div className="mb-10">
-        <nav className="flex items-center justify-center rounded-lg bg-white py-4 shadow-sm">
-          <p className="text-lg font-semibold">Leaderboard</p>
-        </nav>
-      </div>
-
       <div className="mb-12 flex justify-center">
         <div className="bg-white-600 rounded-full px-6 py-3 text-black">
           Based On Rating

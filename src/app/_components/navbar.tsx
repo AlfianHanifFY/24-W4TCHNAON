@@ -31,8 +31,8 @@ const Navbar: React.FC = () => {
     <nav className="fixed top-0 z-50 w-full bg-black p-4 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
         <div className="text-2xl font-bold text-white">
-          <Link href="/" aria-label="Home" onClick={() => handleReload("/")}>
-            W4TCHNAON
+          <Link href="/" aria-label="Home">
+            <button>W4TCHNAON</button>
           </Link>
         </div>
         <div className="hidden flex-grow justify-center space-x-6 md:flex">
@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
           ))}
         </div>
         <div className="flex items-center space-x-4">
-          <div className="hidden text-2xl font-bold text-white md:block">
+          <div className="text-2xl font-bold text-white md:block">
             <Link
               href="/search-movie"
               aria-label="Search Movies"
