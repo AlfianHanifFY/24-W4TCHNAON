@@ -245,8 +245,10 @@ export const userList = pgTable(
   "userList",
   {
     id: uuid("id").primaryKey().notNull().defaultRandom(),
-    name : varchar('name').notNull() ,
-    userId : uuid('userId').notNull()
+    listName : varchar('listName').notNull() ,
+    creator : varchar('creator').notNull(),
+    userId : uuid('userId').notNull(),
+    icon : varchar('icon')
   }
 )
 export const userListMovie = pgTable(
