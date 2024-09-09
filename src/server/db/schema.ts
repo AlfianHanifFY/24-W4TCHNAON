@@ -241,7 +241,22 @@ export const userActor = pgTable(
     userId : uuid('userId').notNull()
   }
 )
-
+export const userList = pgTable(
+  "userList",
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    name : varchar('name').notNull() ,
+    userId : uuid('userId').notNull()
+  }
+)
+export const userListMovie = pgTable(
+  "userListMovie",
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    listId : uuid('listId').notNull(),
+    movieId : uuid('movieId').notNull()
+  }
+)
 export type User = typeof users.$inferSelect;
 export type Movie = typeof movies.$inferSelect;
 export type MoviePoster = typeof moviePosters.$inferSelect;
@@ -257,4 +272,6 @@ export type Session = typeof sessions.$inferSelect;
 export type UserComment = typeof userComments.$inferSelect;
 export type UserFavourite = typeof userFavorite.$inferSelect;
 export type UserWatchLater = typeof userWatchLater.$inferSelect;
+export type UserList = typeof userList.$inferSelect;
+export type UserListMovie = typeof userListMovie.$inferSelect;
 
