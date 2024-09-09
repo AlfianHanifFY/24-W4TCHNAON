@@ -4,7 +4,7 @@ import { createHash } from "crypto";
 import { z } from "zod";
 import { Random } from 'random-js';
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { userActor, userComments, userCountry, userFavorite, userGenre, users, userWatchLater } from "~/server/db/schema";
+import { userActor, userComments, userCountry, userFavorite, userGenre, userList, userListMovie, users, userWatchLater } from "~/server/db/schema";
 import { Actor } from "next/font/google";
 
 export const userRouter = createTRPCRouter({
@@ -226,6 +226,32 @@ export const userRouter = createTRPCRouter({
             eq(userWatchLater.movieId,input.movieId)
           ))
       return {message : "Movie successfully removed"}
+    }),
+
+    createUserList: publicProcedure
+    .input(z.object({userId :z.string(),listName : z.string(),creator: z.string(),icon : z.string()}))
+    .mutation(async ({ctx,input})=>{
+
+      await ctx.db.insert(userList).values({
+        userId : input.userId,
+        listName : input.listName,
+        creator : input.creator,
+        icon : input.icon,
+      })
+
+      return {message: "new list created"}
+    }),
+
+    createUserListMovie: publicProcedure
+    .input(z.object({movieId :z.string(),listId : z.string()}))
+    .mutation(async ({ctx,input})=>{
+
+      await ctx.db.insert(userListMovie).values({
+        movieId : input.movieId,
+        listId : input.listId,
+      })
+
+      return {message: "new movie in list created"}
     }),
 
 })
