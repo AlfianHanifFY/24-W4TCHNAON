@@ -256,7 +256,7 @@ export const userListMovie = pgTable(
   {
     id: uuid("id").primaryKey().notNull().defaultRandom(),
     listId : uuid('listId').notNull(),
-    movieId : uuid('movieId').notNull()
+    movieId : varchar('movieId').notNull()
   }
 )
 export type User = typeof users.$inferSelect;
