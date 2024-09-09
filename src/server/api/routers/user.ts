@@ -254,4 +254,25 @@ export const userRouter = createTRPCRouter({
       return {message: "new movie in list created"}
     }),
 
+    getUserList : publicProcedure
+    .input(z.object({userId: z.string()}))
+    .query(async ({ ctx , input }) => {
+
+      const list = await ctx.db
+      .select({name : userList.listName, icon : userList.icon})
+      .from(userList)
+      .where(eq(userList.userId,input.userId))
+      return {list}
+  }),
+    getUserListMovie : publicProcedure
+      .input(z.object({listId: z.string()}))
+      .query(async ({ ctx , input }) => {
+
+        const list = await ctx.db
+        .select()
+        .from(userListMovie)
+        .where(eq(userListMovie.listId,input.listId))
+        return {list}
+    }),
+
 })
