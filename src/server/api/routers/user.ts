@@ -4,7 +4,7 @@ import { createHash } from "crypto";
 import { z } from "zod";
 import { Random } from 'random-js';
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { userActor, userComments, userCountry, userFavorite, userGenre, userList, userListMovie, users, userWatchLater } from "~/server/db/schema";
+import { movies, userActor, userComments, userCountry, userFavorite, userGenre, userList, userListMovie, users, userWatchLater } from "~/server/db/schema";
 import { Actor } from "next/font/google";
 
 export const userRouter = createTRPCRouter({
@@ -259,7 +259,7 @@ export const userRouter = createTRPCRouter({
     .query(async ({ ctx , input }) => {
 
       const list = await ctx.db
-      .select({name : userList.listName, icon : userList.icon})
+      .select({name : userList.listName, icon : userList.icon, listId : userList.id})
       .from(userList)
       .where(eq(userList.userId,input.userId))
       return {list}
@@ -269,8 +269,9 @@ export const userRouter = createTRPCRouter({
       .query(async ({ ctx , input }) => {
 
         const list = await ctx.db
-        .select()
+        .select({id : userListMovie.id, name:movies.name, duration:movies.minute})
         .from(userListMovie)
+        .leftJoin(movies,eq(userListMovie.movieId,movies.id))
         .where(eq(userListMovie.listId,input.listId))
         return {list}
     }),
