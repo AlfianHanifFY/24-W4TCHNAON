@@ -26,9 +26,9 @@ export default function RootLayout({
         />
       </Head>
       {isClient && ( // Conditional rendering based on isClient state
-        <body className="bg-black">
+        <body className="w-screen bg-black">
           <ClientLayout>
-            <div className="pt-20">{children}</div>
+            <div className="overflow-x-clip pt-20">{children}</div>
           </ClientLayout>
         </body>
       )}

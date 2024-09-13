@@ -11,7 +11,7 @@ export default function Recommendation() {
   return (
     <div className="mt-8 bg-black">
       <h2 className="text-3xl font-bold text-white">New Release Movies</h2>
-      <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6">
+      <div className="mt-4 grid grid-cols-2 gap-2 p-3 md:grid-cols-3 lg:grid-cols-6">
         {mostPopularMovies.data?.list.map((movie) => (
           <a href={`movie-details/${movie.id}`}>
             <div

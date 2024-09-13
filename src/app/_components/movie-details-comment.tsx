@@ -44,9 +44,10 @@ export function MovieDetailsComment({ userId, movieId }) {
             Discussion
           </h2>
         </div>
-        <div className="m-4 max-w-full overflow-hidden rounded-lg bg-[#3C3A3A] shadow-md">
-          {comments.data?.list.map((data) => {
-            return (
+
+        {comments.data?.list.map((data) => {
+          return (
+            <div className="m-4 max-w-full overflow-hidden rounded-lg bg-[#3C3A3A] shadow-md">
               <>
                 <div className="flex items-center border-b bg-[#3C3A3A] p-4">
                   <img
@@ -95,9 +96,9 @@ export function MovieDetailsComment({ userId, movieId }) {
                   </div>
                 </div>
               </>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
 
         <form className="mb-7" onSubmit={handleSubmit}>
           <div className="mb-4 rounded-lg rounded-t-lg border border-gray-900 bg-[#3C3A3A] px-4 py-2 text-white">

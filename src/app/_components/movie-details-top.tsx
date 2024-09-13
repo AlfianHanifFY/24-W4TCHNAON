@@ -83,7 +83,7 @@ export function MovieDetailsTop({ userId, id }) {
         </div>
 
         {/* Title and Genres */}
-        <div className="mt-1 md:w-auto md:p-3">
+        <div className="mt-1 md:w-3/4 md:p-3">
           {/* Title */}
           <div className="md:w- my-8 ml-6 flex h-20 w-80 items-center rounded-lg bg-[#3C3A3A] p-10 md:my-0 md:ml-0 md:w-max">
             <h1 className="text-xl font-semibold tracking-wider text-white md:text-3xl">
