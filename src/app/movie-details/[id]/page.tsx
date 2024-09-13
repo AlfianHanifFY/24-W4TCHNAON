@@ -18,10 +18,10 @@ export default function MovieDetail({ params }) {
   const { data } = useSession();
 
   return (
-    <div>
+    <div className="">
       <MovieDetailsTop userId={data?.user?.id} id={id} />
       <div className="z-10 mt-48 h-0.5 bg-[#757575] md:absolute md:left-20 md:right-6">
-        <div className="absolute mt-3 items-center justify-between rounded-full bg-[#B3B3B3] px-8 py-1 font-normal italic">
+        <div className="absolute mt-3 items-center justify-between rounded-full bg-[#3C3A3A] px-8 py-1 font-normal italic text-white">
           Similar to
         </div>
         <div className="absolute left-0 right-0 z-10 m-2 mt-14 h-0.5 bg-[#757575]"></div>

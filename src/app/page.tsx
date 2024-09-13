@@ -1,10 +1,19 @@
+import Image from "next/image";
+
 export default async function HomePage() {
   return (
     <main className="hfont-ysabeau m-0 box-border bg-black p-0 text-white">
+      import Image from 'next/image';
       <div className="relative z-10 hidden w-full overflow-hidden md:block">
         <div className="flex w-full">
           <div className="flex-shrink-0 flex-grow-0 basis-full">
-            <img className="h-auto w-full" src="/img/home.png" alt="" />
+            <Image
+              className="h-auto w-full"
+              src="/img/home.png"
+              alt=""
+              width={100}
+              height={100}
+            />
           </div>
           <div className="absolute top-40 z-50 ml-96 w-2/4">
             <h4 className="my-16 text-2xl">Welcome to W4CTHNAON</h4>
@@ -19,10 +28,16 @@ export default async function HomePage() {
               explore movies through tailored search filters, and create custom
               playlists that suit your unique taste.
             </p>
+            <a href="/home">
+              <div className="mt-6">
+                <button className="flex w-32 items-center justify-center space-x-2 rounded-xl border border-gray-600 bg-gray-800 bg-opacity-50 py-2 shadow-sm transition duration-150 hover:translate-y-0.5 hover:bg-red-600 hover:shadow-lg">
+                  <span>Start Now</span>
+                </button>
+              </div>
+            </a>
           </div>
-
-          {/* Main */}
         </div>
+
         <div>
           <h1 className="flex items-center justify-center text-2xl font-bold text-white">
             Team Collaborators
@@ -30,7 +45,13 @@ export default async function HomePage() {
         </div>
         <div className="relative mb-20 flex h-auto flex-wrap items-center justify-center overflow-y-hidden p-4 pl-32 pr-32">
           <div className="relative m-4 h-40 w-32 rounded-xl">
-            <img className="h-auto w-auto" src="/img/surya.png" alt="" />
+            <Image
+              className="h-auto w-auto"
+              src="/img/surya.png"
+              alt="Surya Suharna"
+              width={100}
+              height={100}
+            />
             <div>
               <h1 className="mt-2 text-sm font-medium text-white">
                 Surya Suharna
@@ -39,7 +60,13 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative m-4 h-40 w-32 rounded-xl">
-            <img className="h-auto w-auto" src="/img/soni.png" alt="" />
+            <Image
+              className="h-auto w-auto"
+              src="/img/soni.png"
+              alt="Ahmad Wicaksono"
+              width={100}
+              height={100}
+            />
             <div>
               <h1 className="mt-2 text-sm font-medium text-white">
                 Ahmad Wicaksono
@@ -48,7 +75,13 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative m-4 h-40 w-32 rounded-xl">
-            <img className="h-auto w-auto" src="/img/kaindra.png" alt="" />
+            <Image
+              className="h-auto w-auto"
+              src="/img/kaindra.png"
+              alt="Bayu Kaindra"
+              width={100}
+              height={100}
+            />
             <div>
               <h1 className="mt-2 text-sm font-medium text-white">
                 Bayu Kaindra
@@ -57,7 +90,13 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative m-4 h-40 w-32 rounded-xl">
-            <img className="h-auto w-auto" src="/img/persada.png" alt="" />
+            <Image
+              className="h-auto w-auto"
+              src="/img/persada.png"
+              alt="Persada Ramiiza"
+              width={100}
+              height={100}
+            />
             <div>
               <h1 className="mt-2 text-sm font-medium text-white">
                 Persada Ramiiza
@@ -66,7 +105,13 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative m-4 h-40 w-32 rounded-xl">
-            <img className="h-auto w-auto" src="/img/heleni.png" alt="" />
+            <Image
+              className="h-auto w-auto"
+              src="/img/heleni.png"
+              alt="Heleni Gratia"
+              width={100}
+              height={100}
+            />
             <div>
               <h1 className="mt-2 text-sm font-medium text-white">
                 Heleni Gratia
@@ -75,7 +120,13 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative m-4 h-40 w-32 rounded-xl">
-            <img className="h-auto w-auto" src="/img/alfian.png" alt="" />
+            <Image
+              className="h-auto w-auto"
+              src="/img/alfian.png"
+              alt="Alfian Hanif"
+              width={100}
+              height={100}
+            />
             <div>
               <h1 className="mt-2 text-sm font-medium text-white">
                 Alfian Hanif
@@ -84,14 +135,26 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative m-4 h-40 w-32 rounded-xl">
-            <img className="h-auto w-auto" src="/img/rafen.png" alt="" />
+            <Image
+              className="h-auto w-auto"
+              src="/img/rafen.png"
+              alt="Rafen Max"
+              width={100}
+              height={100}
+            />
             <div>
               <h1 className="mt-2 text-sm font-medium text-white">Rafen Max</h1>
               <p className="text-xs italic text-white">Data Science</p>
             </div>
           </div>
           <div className="relative m-4 h-40 w-32 rounded-xl">
-            <img className="h-auto w-auto" src="/img/kenlyn.png" alt="" />
+            <Image
+              className="h-auto w-auto"
+              src="/img/kenlyn.png"
+              alt="Kenlyn Tesalonika"
+              width={100}
+              height={100}
+            />
             <div>
               <h1 className="mt-2 text-sm font-medium text-white">
                 Kenlyn Tesalonika
@@ -100,7 +163,13 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative m-4 h-40 w-32 rounded-xl">
-            <img className="h-auto w-auto" src="/img/amudi.png" alt="" />
+            <Image
+              className="h-auto w-auto"
+              src="/img/amudi.png"
+              alt="Amudi Purba"
+              width={100}
+              height={100}
+            />
             <div>
               <h1 className="mt-2 text-sm font-medium text-white">
                 Amudi Purba
@@ -109,7 +178,13 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative m-4 h-40 w-32 rounded-xl">
-            <img className="h-auto w-auto" src="/img/irdina.png" alt="" />
+            <Image
+              className="h-auto w-auto"
+              src="/img/irdina.png"
+              alt="Irdina Ilmuna"
+              width={100}
+              height={100}
+            />
             <div>
               <h1 className="mt-2 text-sm font-medium text-white">
                 Irdina Ilmuna
@@ -118,7 +193,13 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative m-4 h-40 w-32 rounded-xl">
-            <img className="h-auto w-auto" src="/img/sonya.png" alt="" />
+            <Image
+              className="h-auto w-auto"
+              src="/img/sonya.png"
+              alt="Sonya Putri"
+              width={100}
+              height={100}
+            />
             <div>
               <h1 className="mt-2 text-sm font-medium text-white">
                 Sonya Putri
@@ -237,10 +318,12 @@ export default async function HomePage() {
                   className="relative m-4 h-40 w-24 rounded-xl md:w-32"
                   key={person.name}
                 >
-                  <img
+                  <Image
                     className="h-auto w-auto"
                     src={person.img}
                     alt={person.name}
+                    width={100}
+                    height={100}
                   />
                   <div className="text-center">
                     <h1 className="mt-2 text-xs font-medium text-white md:text-sm">

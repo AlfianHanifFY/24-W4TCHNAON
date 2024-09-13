@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { eq, sql } from "drizzle-orm";
 import { float } from "drizzle-orm/mysql-core";
-import { Actor } from "next/font/google";
+import { Actor, Dhurjati } from "next/font/google";
 import { comment } from "postcss";
 import { string, z } from "zod";
 
@@ -206,7 +206,9 @@ export const movieRouter = createTRPCRouter({
       .select({
         movieId : movies.id,
         poster : moviePosters.link,
-        name : movies.name
+        name : movies.name,
+        duration : movies.minute,
+        tagline  : movies.tagline
       })
       .from(userFavorite)
       .leftJoin(movies,eq(userFavorite.movieId,movies.id))
@@ -224,7 +226,9 @@ export const movieRouter = createTRPCRouter({
       .select({
         movieId : movies.id,
         poster : moviePosters.link,
-        name : movies.name
+        name : movies.name,
+        duration : movies.minute,
+        tagline : movies.tagline
       })
       .from(userWatchLater)
       .leftJoin(movies,eq(userWatchLater.movieId,movies.id))

@@ -26,30 +26,9 @@ export default function RootLayout({
         />
       </Head>
       {isClient && ( // Conditional rendering based on isClient state
-        <body>
-          {/* Navbar */}
-          <div className="fixed left-0 right-0 top-0 z-20 rounded-lg bg-white bg-opacity-50 shadow-md">
-            <nav className="flex items-center p-5">
-              <button>
-                <a href="#">
-                  <i className="bx bx-share bx-sm text-2xl transition-transform duration-300 ease-in-out hover:scale-125"></i>
-                </a>
-              </button>
-              <button className="ml-auto flex space-x-7">
-                <a href="#">
-                  <i className="bx bx-search bx-sm text-2xl transition-transform duration-300 ease-in-out hover:scale-125"></i>
-                </a>
-                <a href="#">
-                  <i className="bx bx-home bx-sm text-2xl transition-transform duration-300 ease-in-out hover:scale-125"></i>
-                </a>
-                <a href="#">
-                  <i className="bx bxs-user-circle bx-sm text-2xl transition-transform duration-300 ease-in-out hover:scale-125"></i>
-                </a>
-              </button>
-            </nav>
-          </div>
+        <body className="w-screen bg-black">
           <ClientLayout>
-            <div className="pt-20">{children}</div>
+            <div className="overflow-x-clip pt-20">{children}</div>
           </ClientLayout>
         </body>
       )}
