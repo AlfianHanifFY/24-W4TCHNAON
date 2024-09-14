@@ -4,16 +4,17 @@ import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 import { api } from "~/trpc/react";
+import MustLoginPage from "../_components/must-login";
 
 export default function Random() {
   const router = useRouter();
   const { data: sessionData, status } = useSession({
     required: true,
-    onUnauthenticated() {
-      router.push("/api/auth/signin");
-      window.location.reload();
-    },
+    onUnauthenticated() {},
   });
+  if (status != "authenticated") {
+    return <MustLoginPage />;
+  }
   const user = sessionData?.user;
 
   const [name, setName] = useState("?????");
