@@ -1,5 +1,5 @@
 "use client";
-import { signIn } from "next-auth/react"; // Use 'next-auth/react' for client-side signIn
+import { signIn, useSession } from "next-auth/react"; // Use 'next-auth/react' for client-side signIn
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -7,6 +7,13 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const { data, status } = useSession({
+    required: true,
+    onUnauthenticated() {},
+  });
+  if (status == "authenticated") {
+    router.push("/home");
+  }
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
