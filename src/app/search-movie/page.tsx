@@ -100,6 +100,13 @@ export default function GenrePage() {
         >
           <div className="h-full overflow-y-auto">
             <ul className="mt-20 space-y-2 md:space-y-4">
+              <a href="/search">
+                <button
+                  className={`w-full rounded-lg bg-red-700 p-3 text-left font-medium tracking-wide text-white transition-colors duration-200`}
+                >
+                  SEARCH
+                </button>
+              </a>
               <li>
                 <button
                   className={`w-full rounded-lg p-3 text-left font-medium tracking-wide transition-colors duration-200 ${
@@ -164,7 +171,7 @@ export default function GenrePage() {
             onClick={toggleSidebar}
             className="m-4 w-32 rounded-lg bg-gray-500 p-2 text-white md:hidden"
           >
-            {showSidebar ? "Filter" : "Filter"}
+            {showSidebar ? "Menu" : "Menu"}
           </button>
           <div className="rounded-lg border border-[#3C3A3A] bg-[#3C3A3A] p-4 text-white shadow-md md:p-8">
             {selectedSection === "Most Popular" && (
@@ -218,7 +225,7 @@ export default function GenrePage() {
                 <h2 className="text-2xl font-bold text-white md:text-3xl">
                   {selectedGenre} Movies
                 </h2>
-                <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
                   {movies.map((movie) => (
                     <a href={`movie-details/${movie.id}`} key={movie.id}>
                       <div className="cursor-pointer text-center hover:scale-105">
