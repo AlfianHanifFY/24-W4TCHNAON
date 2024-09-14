@@ -4,7 +4,7 @@ import { createHash } from "crypto";
 import { z } from "zod";
 import { Random } from 'random-js';
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { movies, userActor, userComments, userCountry, userFavorite, userGenre, userList, userListMovie, users, userWatchLater } from "~/server/db/schema";
+import { moviePosters, movies, userActor, userComments, userCountry, userFavorite, userGenre, userList, userListMovie, users, userWatchLater } from "~/server/db/schema";
 import { Actor } from "next/font/google";
 
 export const userRouter = createTRPCRouter({
@@ -227,9 +227,22 @@ export const userRouter = createTRPCRouter({
           ))
       return {message : "Movie successfully removed"}
     }),
+  
+  deleteUserListMovie : publicProcedure
+    .input(z.object({listId : z.string(), movieId : z.string()}))
+    .mutation(async ({ctx,input}) => {
+      await ctx.db
+          .delete(userListMovie)
+          .where(
+            and(
+              eq(userListMovie.listId,input.listId),
+              eq(userListMovie.movieId,input.movieId)
+            ))
+        return {message : "Movie successfully removed"}
+    }),
 
     createUserList: publicProcedure
-    .input(z.object({userId :z.string(),listName : z.string(),creator: z.string(),icon : z.string()}))
+    .input(z.object({userId :z.string(),listName : z.string(),creator: z.string(),icon : z.string(),prop : z.string(), header : z.string()}))
     .mutation(async ({ctx,input})=>{
 
       await ctx.db.insert(userList).values({
@@ -237,6 +250,8 @@ export const userRouter = createTRPCRouter({
         listName : input.listName,
         creator : input.creator,
         icon : input.icon,
+        prop : input.prop,
+        header : input.header
       })
 
       return {message: "new list created"}
@@ -245,6 +260,12 @@ export const userRouter = createTRPCRouter({
     createUserListMovie: publicProcedure
     .input(z.object({movieId :z.string(),listId : z.string()}))
     .mutation(async ({ctx,input})=>{
+
+      const movie = await ctx.db.select().from(userListMovie).where(and(eq(userListMovie.movieId,input.movieId),eq(userListMovie.listId,input.listId)))
+
+      if (movie.length != 0) {
+        return {message : "fail, movie allready added"}
+      }
 
       await ctx.db.insert(userListMovie).values({
         movieId : input.movieId,
@@ -259,7 +280,7 @@ export const userRouter = createTRPCRouter({
     .query(async ({ ctx , input }) => {
 
       const list = await ctx.db
-      .select({name : userList.listName, icon : userList.icon, listId : userList.id})
+      .select({name : userList.listName, icon : userList.icon, listId : userList.id , prop : userList.prop , header : userList.header})
       .from(userList)
       .where(eq(userList.userId,input.userId))
       return {list}
@@ -269,11 +290,24 @@ export const userRouter = createTRPCRouter({
       .query(async ({ ctx , input }) => {
 
         const list = await ctx.db
-        .select({id : userListMovie.id, name:movies.name, duration:movies.minute})
+        .select({id : userListMovie.id,movieId : movies.id, name:movies.name, duration:movies.minute ,tagline : movies.tagline, poster: moviePosters.link})
         .from(userListMovie)
         .leftJoin(movies,eq(userListMovie.movieId,movies.id))
+        .leftJoin(moviePosters,eq(userListMovie.movieId,moviePosters.movieId))
         .where(eq(userListMovie.listId,input.listId))
-        return {list}
+
+        return list
     }),
+    getUserListById : publicProcedure
+    .input(z.object({listId: z.string()}))
+    .query(async ({ ctx , input }) => {
+
+       const list = await ctx.db
+      .select({name : userList.listName, icon : userList.icon, listId : userList.id , prop : userList.prop , header : userList.header , creator : userList.creator})
+      .from(userList)
+      .where(eq(userList.id,input.listId))
+      
+      return {list}
+  }),
 
 })
