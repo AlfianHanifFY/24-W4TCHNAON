@@ -69,7 +69,7 @@ export const movieRouter = createTRPCRouter({
     getAllmovies: publicProcedure.query(async ({ ctx }) => {
       // Expected output: seluruh data course yang ada
       // Get all courses
-      return await ctx.db.select().from(movies).limit(5);
+      return await ctx.db.select({id:movies.id,name:movies.name}).from(movies);
     }),
 
     getMovieDetail: publicProcedure
@@ -264,7 +264,7 @@ export const movieRouter = createTRPCRouter({
         .from(movies)
         .leftJoin(moviePosters, sql`${movies.id} = ${moviePosters.movieId}`)
         .orderBy(sql`RANDOM()`) 
-        .limit(300);
+        .limit(150);
 
       const sortedList = list.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
     

@@ -6,19 +6,22 @@ import { useRouter } from "next/navigation";
 import { WatchLaterMovies } from "../_components/watch-later-movie";
 import { FavoriteMovies } from "../_components/favorite-movie";
 import Image from "next/image";
+import { api } from "~/trpc/react";
+import MustLoginPage from "../_components/must-login";
 
 export default function HomePage() {
   const router = useRouter();
-  const { data: sessionData } = useSession({
+  const { data: sessionData, status } = useSession({
     required: true,
-    onUnauthenticated() {
-      router.push("/api/auth/signin");
-      window.location.reload();
-    },
+    onUnauthenticated() {},
   });
+  if (status != "authenticated") {
+    return <MustLoginPage />;
+  }
   const user = sessionData?.user;
+  const list = api.user.getUserList.useQuery({ userId: user?.id });
   return (
-    <div className="mt-16 h-screen w-full bg-black">
+    <div className="mt-16 h-screen w-full overflow-auto bg-black">
       <div className="flex h-full">
         <div className="flex-grow p-8">
           <h1 className="mb-10 mt-10 animate-pulse text-5xl font-bold text-white">
@@ -31,14 +34,14 @@ export default function HomePage() {
                 <button className="hover:scale-110">+</button>
               </a>
             </span>
-            <div className="mt-10 grid grid-cols-4 gap-6">
+            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-4">
               <button
                 onClick={() => {
                   router.push("/favorite");
                 }}
                 className="flex flex-row rounded-sm bg-gradient-to-l from-pink-400 via-purple-500 to-indigo-600 p-4 hover:scale-105"
               >
-                <div className="w-1/4 p-1">
+                <div className="p-1 md:w-1/4">
                   <Image
                     src="/icon/love-icon.png"
                     width={30}
@@ -68,6 +71,23 @@ export default function HomePage() {
                   <span className="text-2xl">Watch Later</span>
                 </div>
               </button>
+              {list.data?.list.map((val) => {
+                return (
+                  <button
+                    onClick={() => {
+                      router.push(`list/${val.listId}`);
+                    }}
+                    className={`flex flex-row rounded-sm p-4 hover:scale-105 ${val.prop}`}
+                  >
+                    <div className="w-1/4 p-1">
+                      <Image src={val.icon} width={30} height={30} alt="icon" />
+                    </div>
+                    <div className="p-1">
+                      <span className="text-2xl">{val.name}</span>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

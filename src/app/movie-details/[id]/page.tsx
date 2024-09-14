@@ -11,11 +11,18 @@ import { useSession } from "next-auth/react";
 import { MovieDetailsTop } from "~/app/_components/movie-details-top";
 import { MovieDetailsSimiliar } from "~/app/_components/movie-details-similiar";
 import { MovieDetailsComment } from "~/app/_components/movie-details-comment";
+import MustLoginPage from "~/app/_components/must-login";
 
 export default function MovieDetail({ params }) {
   const id = params.id;
   const router = useRouter();
-  const { data } = useSession();
+  const { data, status } = useSession({
+    required: true,
+    onUnauthenticated() {},
+  });
+  if (status != "authenticated") {
+    return <MustLoginPage />;
+  }
 
   return (
     <div className="">

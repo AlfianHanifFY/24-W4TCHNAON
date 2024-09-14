@@ -7,23 +7,21 @@ import { ProfileImage } from "../_components/profile-image";
 import LogOutButton from "../_components/log-out";
 import { Linden_Hill } from "next/font/google";
 import Link from "next/link";
+import { MustLoginPage } from "../_components/must-login";
 
 export default function ProfilePage() {
   const router = useRouter();
   const { data, status } = useSession({
     required: true,
-    onUnauthenticated() {
-      router.push("/api/auth/signin");
-      window.location.reload();
-    },
+    onUnauthenticated() {},
   });
-  const user = data?.user;
-  if (status === "loading") {
-    return <div>Loading...</div>;
+  if (status != "authenticated") {
+    return <MustLoginPage />;
   }
+  const user = data?.user;
 
   return (
-    <div className="mt-16 flex flex-col bg-black p-8 md:flex-row md:p-0">
+    <div className="mt-16 flex h-screen flex-col bg-black p-8 md:flex-row md:p-0">
       <div className="mx-auto mb-20 mt-14 w-full max-w-4xl">
         <div className="flex flex-col items-center justify-center md:flex-row">
           <img
@@ -64,14 +62,14 @@ export default function ProfilePage() {
         <p className="mb-4 mt-10 text-left italic text-white">FAVORITE GENRE</p>
         <div className="mb-5 flex flex-wrap gap-4">
           <button className="rounded-full bg-[#3C3A3A] px-6 py-2 text-sm font-semibold text-white hover:border-transparent hover:bg-black hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">
-            Genre 1
+            -
           </button>
         </div>
 
         <p className="mb-4 mt-10 text-left italic text-white">FAVORITE ACTOR</p>
         <div className="flex flex-wrap gap-4">
           <button className="rounded-full bg-[#3C3A3A] px-6 py-2 text-sm font-semibold text-white hover:border-transparent hover:bg-black hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">
-            Actor 1
+            -
           </button>
         </div>
 

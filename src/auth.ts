@@ -51,10 +51,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     })
   ],
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      // Redirect all users to the homepage after sign-in
-      return baseUrl; // baseUrl will typically be the homepage ("/")
-    },
     jwt: ({ token, user }) => {
       if (user) {
         const u = user as unknown as any;

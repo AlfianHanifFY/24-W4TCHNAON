@@ -1,14 +1,22 @@
 "use client";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useState } from "react";
 import { api } from "~/trpc/react";
 
 export function MovieDetailsTop({ userId, id }) {
   const movie = api.movie.getMovieDetail.useQuery({ movieId: id });
   const genres = movie.data?.genre;
   const cast = movie.data?.actor;
+  const userList = api.user.getUserList.useQuery({ userId: userId });
   const createWatchLater = api.user.createWatchLater.useMutation();
   const createFavorite = api.user.createFavorite.useMutation();
+  const createUserListMovie = api.user.createUserListMovie.useMutation();
+  const [isSquareVisible, setSquareVisible] = useState(false);
+
+  const toggleSquare = () => {
+    setSquareVisible(!isSquareVisible);
+  };
   return (
     <div className="font-light md:p-6">
       {/* Background Image */}
@@ -66,6 +74,35 @@ export function MovieDetailsTop({ userId, id }) {
                 </button>
               </form>
             </div>
+            <div className="flex cursor-pointer items-center justify-center space-x-2 rounded-full bg-gradient-to-r from-[#BA0000] to-[#FF0000] px-5 py-2 font-normal text-gray-900 shadow-sm ring-1 ring-inset transition-shadow delay-300 hover:bg-gray-50">
+              <button onClick={toggleSquare}>
+                <span className="text-white">Add To List </span>
+              </button>
+            </div>
+            {isSquareVisible && (
+              <div className="mt-5 flex h-full w-40 flex-col items-center justify-center space-y-4 rounded-lg border-2 border-black bg-black p-1">
+                {userList.data?.list?.map((val) => {
+                  return (
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        createUserListMovie.mutate({
+                          movieId: id,
+                          listId: val.listId,
+                        });
+                        alert(
+                          `${movie.data?.detail[0]?.name} added to ${val.name}`,
+                        );
+                      }}
+                    >
+                      <button className="ml-3 w-40 rounded-xl bg-[#3C3A3A] p-2 text-white opacity-80 hover:opacity-100 md:ml-8">
+                        {val.name}
+                      </button>
+                    </form>
+                  );
+                })}
+              </div>
+            )}
             {/* Comments */}
             <div className="mt-16 flex flex-col text-center">
               <div className="flex cursor-pointer items-center justify-center space-x-2 rounded-lg bg-gradient-to-r from-[#BA0000] to-[#FF0000] px-5 py-4 font-normal text-white shadow-sm ring-1 ring-inset hover:bg-gray-50">

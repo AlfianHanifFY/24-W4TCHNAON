@@ -248,7 +248,9 @@ export const userList = pgTable(
     listName : varchar('listName').notNull() ,
     creator : varchar('creator').notNull(),
     userId : uuid('userId').notNull(),
-    icon : varchar('icon')
+    icon : varchar('icon'),
+    prop : varchar('prop'),
+    header : varchar('header')
   }
 )
 export const userListMovie = pgTable(

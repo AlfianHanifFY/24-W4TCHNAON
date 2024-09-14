@@ -3,30 +3,37 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
-import MustLoginPage from "../_components/must-login";
 
-export default function FavoritePage() {
+export default function ListPage({ params }) {
   const router = useRouter();
+  const id = params.id;
   const { data, status } = useSession({
     required: true,
-    onUnauthenticated() {},
+    onUnauthenticated() {
+      redirect("/api/auth/signin");
+    },
   });
-  if (status != "authenticated") {
-    return <MustLoginPage />;
-  }
   const user = data?.user;
-  const movie = api.movie.getFavorite.useQuery({ userId: user?.id });
-  const deleteMovie = api.user.deleteUserFavorite.useMutation();
+  const userList = api.user.getUserListById.useQuery({ listId: id });
+  const movie = api.user.getUserListMovie.useQuery({ listId: id });
+  const deleteMovie = api.user.deleteUserListMovie.useMutation();
 
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="h-screen overflow-scroll bg-black">
-      <div className="mt-16 flex items-center rounded-lg bg-gradient-to-b from-purple-800 to-black p-8">
+      <div
+        className={`mt-16 flex items-center rounded-lg p-8 ${userList.data?.list[0]?.header}`}
+      >
         <div className="hidden md:block">
-          <div className="flex h-40 w-40 items-center justify-center rounded-md bg-gradient-to-b from-indigo-500 to-purple-400">
+          <div
+            className={`flex h-40 w-40 items-center justify-center rounded-md ${userList.data?.list[0]?.prop}`}
+          >
             <Image
-              src="/icon/love-icon.png"
+              src={userList.data?.list[0]?.icon}
               width={60}
               height={60}
               alt="icon"
@@ -36,9 +43,12 @@ export default function FavoritePage() {
 
         <div className="ml-6">
           <p className="text-sm text-gray-300">List</p>
-          <h1 className="text-6xl font-bold text-white">Favorite Movies</h1>
+          <h1 className="text-6xl font-bold text-white">
+            {userList.data?.list[0]?.name}
+          </h1>
           <p className="mt-2 text-lg text-gray-400">
-            created by {user?.name} • {movie.data?.length} movies
+            created by {userList.data?.list[0]?.creator} • {movie.data?.length}{" "}
+            movies
           </p>
         </div>
       </div>
@@ -49,7 +59,7 @@ export default function FavoritePage() {
               <div className="table-cell text-left">#</div>
               <div className="table-cell text-left">Title</div>
               <div className="table-cell text-left"></div>
-              <div className="text-left md:table-cell">Tag Line</div>
+              <div className="table-cell text-left">Tag Line</div>
               <div className="table-cell text-left">Duration</div>
               <div className="table-cell text-left">Action</div>
             </div>
@@ -87,7 +97,7 @@ export default function FavoritePage() {
                         onSubmit={(e) => {
                           e.preventDefault();
                           deleteMovie.mutate({
-                            userId: user?.id,
+                            listId: userList.data?.list[0]?.listId,
                             movieId: val.movieId,
                           });
                           alert(`${val.name} removed from list`);
