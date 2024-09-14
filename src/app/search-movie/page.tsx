@@ -89,17 +89,24 @@ export default function GenrePage() {
   }
 
   return (
-    <div className="relative bg-gray-100 pt-16">
+    <div className="relative bg-black pt-16">
       <div
         className={`flex flex-col md:flex-row ${selectedSection === null ? "h-screen" : "h-full"}`}
       >
         <div
-          className={`fixed inset-y-0 left-0 z-40 w-64 transform bg-white p-4 shadow-lg transition-transform md:relative md:translate-x-0 ${
+          className={`fixed inset-y-0 left-0 z-40 w-64 transform bg-[#3C3A3A] p-4 shadow-lg transition-transform md:relative md:translate-x-0 ${
             showSidebar ? "translate-x-0" : "-translate-x-full"
           }`}
         >
           <div className="h-full overflow-y-auto">
             <ul className="mt-20 space-y-2 md:space-y-4">
+              <a href="/search">
+                <button
+                  className={`w-full rounded-lg bg-red-700 p-3 text-left font-medium tracking-wide text-white transition-colors duration-200`}
+                >
+                  SEARCH
+                </button>
+              </a>
               <li>
                 <button
                   className={`w-full rounded-lg p-3 text-left font-medium tracking-wide transition-colors duration-200 ${
@@ -164,12 +171,12 @@ export default function GenrePage() {
             onClick={toggleSidebar}
             className="m-4 w-32 rounded-lg bg-gray-500 p-2 text-white md:hidden"
           >
-            {showSidebar ? "Filter" : "Filter"}
+            {showSidebar ? "Menu" : "Menu"}
           </button>
-          <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-md md:p-8">
+          <div className="rounded-lg border border-[#3C3A3A] bg-[#3C3A3A] p-4 text-white shadow-md md:p-8">
             {selectedSection === "Most Popular" && (
               <>
-                <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
+                <h2 className="text-2xl font-bold text-white md:text-3xl">
                   Most Popular Movies
                 </h2>
                 <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
@@ -181,7 +188,7 @@ export default function GenrePage() {
                           alt={movie.name}
                           className="mx-auto h-auto w-28 rounded-lg shadow-md md:w-32"
                         />
-                        <h3 className="mx-auto mt-2 w-28 text-sm font-semibold text-gray-800 md:w-32 md:text-lg">
+                        <h3 className="mx-auto mt-2 w-28 text-sm font-semibold text-white md:w-32 md:text-lg">
                           {movie.name}
                         </h3>
                       </div>
@@ -192,7 +199,7 @@ export default function GenrePage() {
             )}
             {selectedSection === "New Release" && (
               <>
-                <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
+                <h2 className="text-2xl font-bold text-white md:text-3xl">
                   New Release Movies
                 </h2>
                 <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
@@ -204,7 +211,7 @@ export default function GenrePage() {
                           alt={movie.name}
                           className="mx-auto h-auto w-28 rounded-lg shadow-md md:w-32"
                         />
-                        <h3 className="mx-auto mt-2 w-28 text-sm font-semibold text-gray-800 md:w-32 md:text-lg">
+                        <h3 className="mx-auto mt-2 w-28 text-sm font-semibold text-white md:w-32 md:text-lg">
                           {movie.name}
                         </h3>
                       </div>
@@ -215,10 +222,10 @@ export default function GenrePage() {
             )}
             {selectedSection === "Genres" && selectedGenre && (
               <>
-                <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
+                <h2 className="text-2xl font-bold text-white md:text-3xl">
                   {selectedGenre} Movies
                 </h2>
-                <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
                   {movies.map((movie) => (
                     <a href={`movie-details/${movie.id}`} key={movie.id}>
                       <div className="cursor-pointer text-center hover:scale-105">
@@ -227,7 +234,7 @@ export default function GenrePage() {
                           alt={movie.name}
                           className="mx-auto h-auto w-28 rounded-lg shadow-md md:w-32"
                         />
-                        <h3 className="mx-auto mt-2 w-28 text-sm font-semibold text-gray-800 md:w-32 md:text-lg">
+                        <h3 className="mx-auto mt-2 w-28 text-sm font-semibold text-white md:w-32 md:text-lg">
                           {movie.name}
                         </h3>
                       </div>
@@ -237,12 +244,12 @@ export default function GenrePage() {
               </>
             )}
             {selectedSection === "Genres" && !selectedGenre && (
-              <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
+              <h2 className="text-2xl font-bold text-white md:text-3xl">
                 Select a Genre
               </h2>
             )}
             {!selectedSection && (
-              <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
+              <h2 className="text-2xl font-bold text-white md:text-3xl">
                 Select a Section
               </h2>
             )}

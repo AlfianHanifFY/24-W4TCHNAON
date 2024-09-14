@@ -4,16 +4,17 @@ import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 import { api } from "~/trpc/react";
+import MustLoginPage from "../_components/must-login";
 
 export default function Random() {
   const router = useRouter();
   const { data: sessionData, status } = useSession({
     required: true,
-    onUnauthenticated() {
-      router.push("/api/auth/signin");
-      window.location.reload();
-    },
+    onUnauthenticated() {},
   });
+  if (status != "authenticated") {
+    return <MustLoginPage />;
+  }
   const user = sessionData?.user;
 
   const [name, setName] = useState("?????");
@@ -39,7 +40,7 @@ export default function Random() {
     return <div>Loading...</div>;
   }
   return (
-    <div className="mt-16 p-12">
+    <div className="mt-16 bg-black p-12 md:h-screen">
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
       <link
@@ -49,8 +50,10 @@ export default function Random() {
 
       {/* Also Like + Refresh */}
       <div className="flex items-center justify-between">
-        <div className="text-3xl font-semibold">Find Movie !</div>
-        <div className="flex items-center justify-center rounded-full border-2 border-[#BA0000] bg-[#F5F5F5] px-7 py-1 text-[#BA0000] hover:bg-[#BA0000] hover:text-white">
+        <div className="text-2xl font-semibold text-white md:text-3xl">
+          Find Movie !
+        </div>
+        <div className="flex items-center justify-center rounded-full border-2 bg-[#3C3A3A] px-7 py-1 text-white hover:bg-[#BA0000] hover:text-white">
           <i className="bx bx-refresh"></i> {/* Icon */}
           <button onClick={() => handleRefreshClick()}> Refresh </button>
         </div>
@@ -62,13 +65,13 @@ export default function Random() {
             <img src={poster}></img>
           </div>
           <div className="flex flex-col">
-            <div className="flex flex-col md:flex-row">
-              <div className="mt-3 text-4xl font-bold md:m-3 md:pl-12">
+            <div className="flex flex-col md:flex-col">
+              <div className="mt-3 text-4xl font-bold text-white md:m-3 md:pl-12">
                 {" "}
                 {name}{" "}
               </div>
               <div className="mt-2 md:ml-8">
-                <span className="ml-2 rounded-full bg-[#D9D9D9] px-3 font-normal italic">
+                <span className="ml-2 rounded-full bg-yellow-200 px-3 font-normal italic">
                   {rating}/5.0
                 </span>
               </div>
@@ -124,12 +127,14 @@ export default function Random() {
       </div>
 
       {/* Line */}
-      <div className="mt-10 h-0.5 bg-[#757575] sm:w-screen md:mx-20"></div>
+      <div className="mt-10 h-0.5 w-fit bg-[#757575] md:mx-20"></div>
 
       {/* Storyline */}
       <div className="mt-4 flex flex-col space-y-3 md:mx-20">
-        <div className="text-lg font-semibold md:ml-14">Storyline</div>
-        <div className="text-l h-full w-full rounded-xl bg-[#D9D9D9] p-2 sm:w-screen">
+        <div className="text-lg font-semibold text-white md:ml-14">
+          Storyline
+        </div>
+        <div className="text-l mx-auto h-full w-full max-w-4xl rounded-xl bg-[#3C3A3A] p-2 text-white">
           <p>{description}</p>
         </div>
       </div>

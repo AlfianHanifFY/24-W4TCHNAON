@@ -13,11 +13,9 @@ export default function MovieLeaderboard() {
   const rank = 4;
 
   return (
-    <main className="min-h-screen bg-gray-50 p-8">
+    <main className="min-h-screen bg-black p-8">
       <div className="mb-12 flex justify-center">
-        <div className="bg-white-600 rounded-full px-6 py-3 text-black">
-          Based On Rating
-        </div>
+        <div className="bg-white-600 rounded-full px-6 py-3 text-black"></div>
       </div>
 
       <div className="mb-16 flex justify-center space-x-8">
@@ -29,12 +27,12 @@ export default function MovieLeaderboard() {
             <img
               src={data.data?.list[1].link}
               alt="Cover"
-              className="h-56 w-full rounded-lg shadow-md"
+              className="h-32 w-full rounded-lg shadow-md md:h-56"
             />
           </a>
-          <div className="mt-4">
-            <p className="text-lg font-bold">{data.data?.list[1].name}</p>
-            <p className="text-gray-500">{data.data?.list[1].rating}</p>
+          <div className="mt-4 text-white">
+            <p className="font-bold md:text-lg">{data.data?.list[1].name}</p>
+            <p className="">{data.data?.list[1].rating}</p>
           </div>
         </div>
         <div className="relative w-48 transform text-center transition hover:scale-105">
@@ -45,13 +43,13 @@ export default function MovieLeaderboard() {
             <img
               src={data.data?.list[0].link}
               alt="Cover"
-              className="h-64 w-full rounded-lg shadow-md"
+              className="h-36 w-full rounded-lg shadow-md md:h-64"
             />
           </a>
 
-          <div className="mt-4">
+          <div className="mt-4 text-white">
             <p className="text-lg font-bold">{data.data?.list[0].name}</p>
-            <p className="text-gray-500">{data.data?.list[0].rating}</p>
+            <p className="">{data.data?.list[0].rating}</p>
           </div>
         </div>
         <div className="relative w-40 transform text-center transition hover:scale-105">
@@ -62,13 +60,13 @@ export default function MovieLeaderboard() {
             <img
               src={data.data?.list[2].link}
               alt="Cover"
-              className="h-56 w-full rounded-lg shadow-md"
+              className="h-36 w-full rounded-lg shadow-md md:h-56"
             />
           </a>
 
-          <div className="mt-4">
-            <p className="text-lg font-bold">{data.data?.list[2].name}</p>
-            <p className="text-gray-500">{data.data?.list[2].rating}</p>
+          <div className="mt-4 text-white">
+            <p className="font-bold md:text-lg">{data.data?.list[2].name}</p>
+            <p className="">{data.data?.list[2].rating}</p>
           </div>
         </div>
       </div>
@@ -77,22 +75,22 @@ export default function MovieLeaderboard() {
         {restData.map((val, rank) => (
           <div
             key={rank + 4}
-            className="flex transform items-center rounded-lg bg-white p-6 shadow-md transition hover:scale-105"
+            className="flex transform items-center rounded-lg bg-[#3C3A3A] p-6 shadow-md transition hover:scale-105"
           >
-            <span className="w-12 text-3xl font-bold text-gray-700">
+            <span className="w-6 text-3xl font-bold text-white md:w-12">
               {rank + 4}
             </span>
             <a href={`movie-details/${val.id}`}>
               <img
                 src={val.link}
                 alt="Cover"
-                className="ml-6 h-28 w-20 rounded-lg shadow-sm"
+                className="ml-6 h-20 w-16 rounded-lg shadow-sm md:h-28 md:w-20"
               />
             </a>
 
-            <div className="ml-6">
+            <div className="ml-6 text-white">
               <p className="text-lg font-bold">{val.name}</p>
-              <p className="text-gray-500">{val.rating}</p>
+              <p className="">{val.rating}</p>
             </div>
           </div>
         ))}
